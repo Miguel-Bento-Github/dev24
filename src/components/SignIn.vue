@@ -33,21 +33,21 @@ const login = <K extends keyof typeof firebaseProvider>(providerKey: K) => {
 .google-logo {
   height: 40px;
   width: 40px;
-  background: url("~@/assets/google-button-svg/normal.svg") no-repeat;
+  background: url("/g-cta/normal.svg") no-repeat;
   background-size: contain;
 
   &:active {
-    background: url("~@/assets/google-button-svg/pressed.svg") no-repeat;
+    background: url("/g-cta/pressed.svg") no-repeat;
     background-size: contain;
   }
 
   &:focus {
-    background: url("~@/assets/google-button-svg/focus.svg") no-repeat;
+    background: url("/g-cta/focus.svg") no-repeat;
     background-size: contain;
   }
 
   &:disabled {
-    background: url("~@/assets/google-button-svg/disabled.svg") no-repeat;
+    background: url("/g-cta/disabled.svg") no-repeat;
     background-size: contain;
   }
 }

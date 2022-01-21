@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "target": "esnext",
     "useDefineForClassFields": true,
@@ -11,6 +12,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "importHelpers": true,
     "paths": {
       "@/*": ["src/*"]
     },

@@ -2,6 +2,9 @@
   "name": "landing",
   "version": "0.0.1",
   "license": "UNLICENSED",
+  "author": {
+    "name": "Miguel Bento"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -22,6 +25,7 @@
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
+    "firebase": "^9.6.4",
     "prettier": "^2.5.1",
     "sass": "^1.49.0",
     "typescript": "~4.5.4",
