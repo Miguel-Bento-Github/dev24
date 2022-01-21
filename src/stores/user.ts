@@ -10,16 +10,16 @@ export const useUserStore = defineStore("user", {
       isSignedIn: false,
     };
   },
-  getters: {
-    getUser() {
-      getUserState().then(({ uid, displayName, photoURL }) => {
-        if (!uid && !displayName && !photoURL) return;
-        if (uid) this.id = uid;
-        if (displayName) this.name = displayName;
-        if (photoURL) this.photoURL = photoURL;
+  actions: {
+    async setUser() {
+      const { uid, displayName, photoURL } = await getUserState();
 
-        this.isSignedIn = true;
-      });
+      if (!uid && !displayName && !photoURL) return;
+      if (uid) this.id = uid;
+      if (displayName) this.name = displayName;
+      if (photoURL) this.photoURL = photoURL;
+
+      this.isSignedIn = true;
     },
   },
 });

@@ -2,27 +2,56 @@
 
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --white: #ffffff;
-  --white-soft: #f8f8f8;
-  --white-mute: #f2f2f2;
+  --light-conic: conic-gradient(
+    from 90deg at 60% 100%,
+    #a8b2e6,
+    #afb2e6,
+    #c0b3e4,
+    #d5b6e0,
+    #e9bbd9,
+    #f8c4d1,
+    #ffcfcd,
+    #ffdbce,
+    #ffe7d3,
+    #fef0db,
+    #fdf6e1,
+    #fdf8e4
+  );
 
-  --black: #181818;
-  --black-soft: #222222;
-  --black-mute: #282828;
+  --dark-conic: conic-gradient(
+    from 90deg at 0% 0%,
+    #0c001a,
+    #1b0d22,
+    #291429,
+    #381a2f,
+    #472134,
+    #562838,
+    #65303a,
+    #72393c,
+    #7f443d,
+    #89503d,
+    #925c3e,
+    #996a3f
+  );
 
-  --indigo: #2c3e50;
+  --white: #faefff;
+  --black: #1b0d22;
+  --blue: #a8b2e6;
+  --blue-dark: #1f005c;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--white-soft);
-  --color-text: var(--black-soft);
+  --color-background: var(--light-conic);
+  --color-text: var(--black);
+  --color-link: var(--blue-dark);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--black-soft);
-    --color-text: var(--white-soft);
+    --color-background: var(--dark-conic);
+    --color-text: var(--white);
+    --color-link: var(--blue);
   }
 }
 
@@ -39,4 +68,23 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.fade-enter-active {
+  transition: all 0.15s ease-out;
+}
+
+.fade-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(2rem);
 }

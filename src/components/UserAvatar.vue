@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useUserStore } from "@/store/useUserStore";
+import { useUserStore } from "@/stores/user";
 
-const userStore = useUserStore();
+const user = useUserStore();
 </script>
 
 <template>
@@ -10,8 +10,8 @@ const userStore = useUserStore();
       height="64"
       width="64"
       class="avatar-img"
-      :src="userStore.photoURL"
-      :alt="`${userStore.name} profile image`"
+      :src="user.photoURL"
+      :alt="`${user.name} profile image`"
     />
   </article>
 </template>

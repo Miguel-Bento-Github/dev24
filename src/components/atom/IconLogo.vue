@@ -30,7 +30,28 @@
         <stop offset="0.9090909090909092" stop-color="#fdaf69" />
         <stop offset="1" stop-color="#ffb56b" />
       </linearGradient>
-      <g stroke="url('#gradient')">
+      <linearGradient
+        id="gradient-light"
+        x1="0"
+        y1="0"
+        x2="1200"
+        y2="1100"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0" stop-color="#1f005c" />
+        <stop offset="0.09090909090909091" stop-color="#2c005d" />
+        <stop offset="0.18181818181818182" stop-color="#47005f" />
+        <stop offset="0.2727272727272727" stop-color="#680060" />
+        <stop offset="0.36363636363636365" stop-color="#8b0460" />
+        <stop offset="0.4545454545454546" stop-color="#ac265e" />
+        <stop offset="0.5454545454545454" stop-color="#c9475c" />
+        <stop offset="0.6363636363636364" stop-color="#df675c" />
+        <stop offset="0.7272727272727273" stop-color="#ef855e" />
+        <stop offset="0.8181818181818182" stop-color="#f89e63" />
+        <stop offset="0.9090909090909092" stop-color="#fdaf69" />
+        <stop offset="1" stop-color="#2c005d" />
+      </linearGradient>
+      <g class="dev">
         <path
           d="M300 1499 c-13 -6 -28 -15 -32 -22 -4 -7 -8 -231 -8 -499 0 -571 -9
         -528 110 -528 56 0 70 3 70 15 0 12 -14 15 -63 15 -36 0 -68 5 -75 12 -9 9
@@ -123,6 +144,14 @@
 .number {
   animation: neon 4s ease-in-out infinite alternate;
   animation-delay: 3.5s;
+}
+
+.dev {
+  stroke: url("#gradient-light");
+
+  @media (prefers-color-scheme: dark) {
+    stroke: url("#gradient");
+  }
 }
 
 @keyframes neon {

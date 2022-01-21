@@ -8,7 +8,7 @@ const login = <K extends keyof typeof firebaseProvider>(providerKey: K) => {
 </script>
 
 <template>
-  <button disabled @click="login('google')" type="button" class="google-button">
+  <button @click="login('google')" type="button" class="google-button">
     <span class="google-logo"></span>
     <div class="google-text">Sign in with Google</div>
   </button>

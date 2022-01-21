@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import SignIn from "@/components/SignIn.vue";
+import SignIn from "@/components/molecule/SignIn.vue";
 </script>
 
 <template>
   <h1>Here comes Pumpkin</h1>
-  <div class="sign-in">
-    <button
-      aria-label="close sign in button"
-      type="button"
-      class="close"
-    ></button>
+  <transition name="fade">
     <SignIn />
-  </div>
+  </transition>
 </template>
 
 <style lang="scss" scoped>
@@ -24,40 +19,41 @@ import SignIn from "@/components/SignIn.vue";
 .close {
   display: flex;
   margin-left: auto;
+  margin-bottom: 4px;
   position: relative;
   cursor: pointer;
   width: 24px;
   height: 24px;
+  transform: rotateZ(45deg);
+  transition: all 0.15s ease-in-out;
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 8px;
+    left: 50%;
+    transform: translateX(-50%);
     height: 100%;
     width: 2px;
     background: #e27171;
-    transform-origin: center;
-    transform: rotate(45deg);
     filter: drop-shadow(0 0 1px #ccc);
   }
 
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 8px;
-    height: 100%;
-    width: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 24px;
     background: #ff0000;
-    transform-origin: center;
-    transform: rotate(-45deg);
     filter: drop-shadow(0 0 1px #ccc);
   }
 
   &:hover {
-    transition: filter 0.15s cubic-bezier(1, 0.2, 0.49, 1.88);
-    filter: drop-shadow(0 0 1px #ccc);
+    transition: filter 0.25s cubic-bezier(1, 0.2, 0.49, 1.88);
+    filter: drop-shadow(0 0 1px #e0e0e0);
   }
 }
 </style>
