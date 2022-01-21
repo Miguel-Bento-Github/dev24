@@ -4,7 +4,7 @@ export const routes = [
     name: "Home",
     component: () => import("@/views/HomeView.vue"),
     meta: {
-      title: "Home",
+      title: "Dev24",
       metaTags: [
         {
           name: "description",
@@ -16,8 +16,7 @@ export const routes = [
   {
     path: "/about",
     name: "about",
-    component: () =>
-      import(/* webpackChunkName: "AboutView" */ "@/views/AboutView.vue"),
+    component: () => import("@/views/AboutView.vue"),
     meta: {
       title: "About",
       metaTags: [
@@ -29,10 +28,24 @@ export const routes = [
     },
   },
   {
+    path: "/privacy-policy",
+    name: "privacy",
+    component: () => import("@/views/PrivacyPolicy.vue"),
+    meta: {
+      title: "Privacy Policy",
+      metaTags: [
+        {
+          name: "description",
+          content:
+            "This website uses cookies. We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.",
+        },
+      ],
+    },
+  },
+  {
     path: "/:catchAll(.*)",
     name: "404",
-    component: () =>
-      import(/* webpackChunkName: "NotFoundView" */ "@/views/NotFoundView.vue"),
+    component: () => import("@/views/NotFoundView.vue"),
     meta: {
       title: "404",
       metaTags: [

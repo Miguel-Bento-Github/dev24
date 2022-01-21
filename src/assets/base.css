@@ -1,9 +1,11 @@
 @import "./reset.css";
+@import "./font/silka.css";
+@import "./typography.css";
 
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --light-conic: conic-gradient(
-    from 90deg at 60% 100%,
+    from 90deg at 100% 0%,
     #a8b2e6,
     #afb2e6,
     #c0b3e4,
@@ -19,7 +21,7 @@
   );
 
   --dark-conic: conic-gradient(
-    from 90deg at 0% 0%,
+    from 90deg at 100% 0%,
     #0c001a,
     #1b0d22,
     #291429,
@@ -58,13 +60,10 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
-  transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
+  line-height: 1.4;
   font-family: Silka, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
-  font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

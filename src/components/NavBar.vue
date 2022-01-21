@@ -8,6 +8,9 @@ import IconLogo from "@/components/atom/IconLogo.vue";
     <nav class="nav">
       <RouterLink class="router-link" to="/">Home</RouterLink>
       <RouterLink class="router-link" to="/about">About</RouterLink>
+      <RouterLink class="router-link" to="/privacy-policy">
+        Privacy Policy
+      </RouterLink>
     </nav>
   </header>
 </template>
