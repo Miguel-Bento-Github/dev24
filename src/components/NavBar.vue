@@ -1,17 +1,48 @@
 <script setup lang="ts">
 import IconLogo from "@/components/atom/icons/IconLogo.vue";
+import router from "@/router";
+import { computed, ref, watchEffect } from "vue";
+import IconMenu from "./atom/icons/IconMenu.vue";
+
+const isSmallScreen = computed(
+  () => window.matchMedia("(max-width: 800px)").matches
+);
+
+const isMenuOpen = ref(!isSmallScreen.value);
+
+if (isSmallScreen.value) {
+  watchEffect(() => {
+    router.beforeEach(() => {
+      isMenuOpen.value = false;
+    });
+  });
+}
+
+const closeMenu = () => {
+  if (isSmallScreen.value) isMenuOpen.value = false;
+};
 </script>
 
 <template>
-  <header class="wrapper">
+  <header @focusout="closeMenu" class="wrapper">
     <IconLogo />
-    <nav class="nav">
-      <RouterLink class="router-link" to="/">Home</RouterLink>
-      <RouterLink class="router-link" to="/about">About</RouterLink>
-      <RouterLink class="router-link" to="/privacy-policy">
-        Privacy Policy
-      </RouterLink>
-    </nav>
+    <button
+      type="button"
+      v-if="isSmallScreen"
+      @click="isMenuOpen = !isMenuOpen"
+    >
+      <IconMenu :is-open="isMenuOpen" />
+    </button>
+
+    <transition name="fade">
+      <nav class="nav" v-if="isMenuOpen">
+        <RouterLink class="router-link" to="/">Home</RouterLink>
+        <RouterLink class="router-link" to="/about">About</RouterLink>
+        <RouterLink class="router-link" to="/privacy-policy">
+          Privacy Policy
+        </RouterLink>
+      </nav>
+    </transition>
   </header>
 </template>
 
@@ -19,23 +50,29 @@ import IconLogo from "@/components/atom/icons/IconLogo.vue";
 @use "@/scss/boot.scss" as *;
 
 .wrapper {
-  opacity: 0;
   display: flex;
   justify-content: space-between;
-  padding-right: 5vw;
   margin-bottom: 2rem;
+}
 
-  @media screen and (min-width: 800px) {
-    opacity: 1;
+.nav {
+  @media screen and (max-width: 800px) {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    background: rgba(black, 0.7);
+    backdrop-filter: blur(3px);
+    border-radius: 1rem;
   }
 }
 
 .router-link {
   position: relative;
   display: inline-block;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  font-size: 1rem;
+  padding: 1rem;
   overflow: hidden;
 
   &:first-child::before {

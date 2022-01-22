@@ -2,7 +2,7 @@ import { reactive } from "vue";
 
 export const useEntrance = () => {
   if (sessionStorage.entrance) return;
-  sessionStorage.entrance = "on";
+  sessionStorage.entrance = "played";
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   const pos = reactive({ x: 0, y: 0 });

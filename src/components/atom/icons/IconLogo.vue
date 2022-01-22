@@ -167,16 +167,4 @@
     stroke: #fa8072;
   }
 }
-
-@keyframes neon {
-  0% {
-    filter: drop-shadow(0 0 4px #5a5f15);
-  }
-  33% {
-    filter: drop-shadow(0 0 2px #222);
-  }
-  66% {
-    stroke: #fa8072;
-  }
-}
 </style>

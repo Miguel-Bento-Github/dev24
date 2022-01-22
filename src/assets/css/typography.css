@@ -36,3 +36,9 @@ h4 {
 h5 {
   font-size: 1.414rem;
 }
+
+a,
+button {
+  font-size: 1rem;
+  font-weight: 600;
+}

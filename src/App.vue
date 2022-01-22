@@ -26,6 +26,7 @@ useRegisterSW({
 
 <style lang="scss">
 @import "@/assets/base.css";
+@import "@/scss/keyframes.scss";
 
 #app {
   max-width: 1280px;
