@@ -1,27 +1,18 @@
 <script setup lang="ts">
-import { useRegisterSW } from "virtual:pwa-register/vue";
 import { RouterView } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import { useUserStore } from "./stores/user";
+import ReloadPrompt from "./components/ReloadPrompt.vue";
 
 const user = useUserStore();
 user.setUser();
-
-const everyHour = 60 * 60 * 1000;
-useRegisterSW({
-  onRegistered(registration) {
-    registration &&
-      setInterval(() => {
-        registration.update();
-      }, everyHour);
-  },
-});
 </script>
 
 <template>
   <div role="img" class="background"></div>
   <NavBar />
   <RouterView />
+  <ReloadPrompt />
 </template>
 
 <style lang="scss">

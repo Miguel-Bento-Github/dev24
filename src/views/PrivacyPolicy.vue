@@ -41,8 +41,8 @@ onUnmounted(() => {
   font-size: 1rem;
 }
 .cookies {
-  background: #fff;
-  color: #000;
+  background: var(--white);
+  color: var(--black);
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: inset 0 -4px 4px 4px #999, inset 0 -8px 8px #777,

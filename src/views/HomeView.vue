@@ -13,6 +13,13 @@ const user = useUserStore();
     Through Dev24, I offer my web development skills to create beautiful and
     user-friendly websites for you.
   </p>
+  <p>
+    From your Smartphone to your 8k OLED Screen. Anything is possible with state
+    of the art animations we provide.
+  </p>
+  <p>
+    We build for Chrome, Firefox, Safari, Edge, and virtually any modern browser
+  </p>
 
   <transition name="fade">
     <SignIn />

@@ -41,6 +41,7 @@
 :root {
   --color-background: var(--light-conic);
   --color-text: var(--black);
+  --color-text-invert: var(--white);
   --color-link: var(--blue-dark);
 }
 
@@ -48,6 +49,7 @@
   :root {
     --color-background: var(--dark-conic);
     --color-text: var(--white);
+    --color-text-invert: var(--white);
     --color-link: var(--blue);
   }
 }

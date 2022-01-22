@@ -63,7 +63,7 @@ const closeMenu = () => {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-    background: rgba(black, 0.7);
+    background: rgb(#000, 70%);
     backdrop-filter: blur(3px);
     border-radius: 1rem;
   }
