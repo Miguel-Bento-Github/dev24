@@ -138,7 +138,7 @@
   stroke-dasharray: 10000;
   stroke-dashoffset: 10000;
   filter: drop-shadow(0 0 2px #fa8072);
-  animation: neon 4s ease-out forwards reverse;
+  animation: draw 4s ease-out forwards reverse;
 }
 
 .number {
@@ -154,10 +154,22 @@
   }
 }
 
-@keyframes neon {
+@keyframes draw {
   0% {
     stroke-dashoffset: 0;
     stroke-width: 24px;
+    filter: drop-shadow(0 0 4px #5a5f15);
+  }
+  33% {
+    filter: drop-shadow(0 0 2px #222);
+  }
+  66% {
+    stroke: #fa8072;
+  }
+}
+
+@keyframes neon {
+  0% {
     filter: drop-shadow(0 0 4px #5a5f15);
   }
   33% {

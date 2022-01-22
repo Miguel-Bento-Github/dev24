@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import IconLogo from "@/components/atom/IconLogo.vue";
+import IconLogo from "@/components/atom/icons/IconLogo.vue";
 </script>
 
 <template>
@@ -19,10 +19,15 @@ import IconLogo from "@/components/atom/IconLogo.vue";
 @use "@/scss/boot.scss" as *;
 
 .wrapper {
+  opacity: 0;
   display: flex;
   justify-content: space-between;
   padding-right: 5vw;
   margin-bottom: 2rem;
+
+  @media screen and (min-width: 800px) {
+    opacity: 1;
+  }
 }
 
 .router-link {

@@ -24,15 +24,19 @@ useRegisterSW({
   <RouterView />
 </template>
 
-<style>
+<style lang="scss">
 @import "@/assets/base.css";
 
 #app {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem;
   font-weight: normal;
+  padding: 1rem;
+
+  @media screen and (min-width: 800px) {
+    padding: 2rem;
+  }
 }
 
 .background {
