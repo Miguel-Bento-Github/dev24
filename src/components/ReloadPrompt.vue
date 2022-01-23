@@ -46,7 +46,6 @@ const close = async () => {
 
 button {
   border: 1px solid var(--color-text);
-  outline: none;
   margin-right: 5px;
   border-radius: 2px;
   padding: 3px 10px;

@@ -16,6 +16,7 @@ img, picture, video, canvas, svg {
 }
 input, button, textarea, select {
   font: inherit;
+  cursor: pointer;
 }
 button {
   background: transparent;

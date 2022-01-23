@@ -1,6 +1,13 @@
-@use "./typography";
+@import "./keyframes.scss";
 
-@mixin pseudo() {
+@mixin pseudo {
   position: absolute;
   content: "";
+}
+
+.hidden {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  pointer-events: none;
 }

@@ -14,12 +14,13 @@
   },
   "dependencies": {
     "pinia": "^2.0.9",
+    "remove": "^0.1.5",
     "vue": "^3.2.27",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
-    "@types/node": "^16.11.21",
+    "@types/node": "^17.0.10",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^10.0.0",

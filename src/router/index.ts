@@ -14,4 +14,12 @@ router.afterEach((to) => {
   });
 });
 
+export const registerPWA = () => {
+  const register = async () => {
+    const { registerSW } = await import("virtual:pwa-register");
+    registerSW();
+  };
+  router.isReady().then(register);
+};
+
 export default router;

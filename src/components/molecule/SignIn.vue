@@ -3,10 +3,11 @@ import GoogleButton from "@/components/atom/GoogleButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import { useUserStore } from "@/stores/user";
 import { computed, ref, watchEffect } from "vue";
+import IconCross from "@/components/atom/icons/IconCross.vue";
 const user = useUserStore();
 
 const signInDisabled = ref(sessionStorage["sign-in-disabled"]);
-const isEnabled = computed(() => !signInDisabled.value || user.isSignedIn);
+const showSignIn = computed(() => !signInDisabled.value || user.isSignedIn);
 
 watchEffect(() => {
   if (signInDisabled.value) {
@@ -16,18 +17,21 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="sign-in" v-if="isEnabled">
-    <button
-      aria-label="close sign in button"
-      type="button"
-      class="close"
-      @click="signInDisabled = true"
-      v-if="!user.isSignedIn"
-    ></button>
-    <transition name="fade" mode="out-in">
-      <GoogleButton v-if="!user.isSignedIn" />
-      <UserAvatar v-else />
-    </transition>
+  <div class="sign-in">
+    <TransitionGroup name="fade" mode="out-in">
+      <GoogleButton key="button" v-if="!signInDisabled && !user.isSignedIn" />
+      <UserAvatar key="avatar" v-if="user.isSignedIn" />
+      <button
+        key="cross"
+        aria-label="close sign in button"
+        type="button"
+        class="close"
+        v-else
+        @click="signInDisabled = !signInDisabled"
+      >
+        <IconCross :rotate="signInDisabled" />
+      </button>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -39,15 +43,15 @@ watchEffect(() => {
 }
 
 .close {
-  display: flex;
+  display: block;
+  position: fixed;
+  bottom: 3.5rem;
+  right: 1rem;
   margin-left: auto;
   margin-bottom: 4px;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
-  background: url("@/assets/svg/close.svg") no-repeat;
-  background-size: contain;
-  transition: filter 0.15s ease-in-out;
 
   &:hover {
     filter: drop-shadow(0 0 1px #e0e0e0);

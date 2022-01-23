@@ -37,7 +37,7 @@ const closeMenu = () => {
     <transition name="fade">
       <nav class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Home</RouterLink>
-        <RouterLink class="router-link" to="/about">About</RouterLink>
+        <RouterLink class="router-link" to="/about">What I do</RouterLink>
         <RouterLink class="router-link" to="/privacy-policy">
           Privacy Policy
         </RouterLink>
@@ -108,11 +108,5 @@ const closeMenu = () => {
 
 .router-link-exact-active:hover {
   background-color: transparent;
-}
-
-@keyframes slide {
-  from {
-    transform: translateX(-200%);
-  }
 }
 </style>

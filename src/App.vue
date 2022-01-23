@@ -3,6 +3,11 @@ import { RouterView } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import { useUserStore } from "./stores/user";
 import ReloadPrompt from "./components/ReloadPrompt.vue";
+import { defineAsyncComponent } from "vue";
+const shouldReload =
+  typeof window !== "undefined"
+    ? defineAsyncComponent(() => import("@/components/ReloadPrompt.vue"))
+    : null;
 
 const user = useUserStore();
 user.setUser();
@@ -12,12 +17,12 @@ user.setUser();
   <div role="img" class="background"></div>
   <NavBar />
   <RouterView />
-  <ReloadPrompt />
+  <ReloadPrompt v-if="shouldReload" />
 </template>
 
 <style lang="scss">
 @import "@/assets/base.css";
-@import "@/scss/keyframes.scss";
+@import "@/scss/boot.scss";
 
 #app {
   max-width: 1280px;

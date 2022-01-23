@@ -1,0 +1,32 @@
+{
+  "intro": "Through Dev24, I offer my web development skills to create beautiful and user-friendly websites for you.",
+  "devices": "From your Smartphone to your 8k OLED Screen. Anything is possible with state of the art animations I provide.",
+  "browserSupport": "I build for Chrome, Firefox, Safari, Edge, and virtually any modern browser",
+  "sections": [
+    {
+      "header": "Here's my personal card",
+      "link": "https://www.mr-monkey.net/",
+      "caption": "mr-monkey.net"
+    },
+    {
+      "header": "Claymorphic styles might be the new trend, your website can use these cool elements.",
+      "link": "https://miguel-bento-github.github.io/claymorphic/",
+      "caption": "claymorphic"
+    },
+    {
+      "header": "A simple photo gallery can go a long way",
+      "link": "https://miguel-bento-github.github.io/photo-gallery/",
+      "caption": "photo-gallery"
+    },
+    {
+      "header": "Maybe neumorphism is your thing",
+      "link": "https://miguel-bento-github.github.io/neumorphism/",
+      "caption": "neumorphism"
+    },
+    {
+      "header": "Always keeping up with the latest technologies",
+      "link": "https://mix-blend-mode.netlify.app/",
+      "caption": "mix-blend-mode"
+    }
+  ]
+}
