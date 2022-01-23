@@ -65,6 +65,7 @@ const closeMenu = () => {
     flex-direction: column;
     background: rgb(#000, 70%);
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border-radius: 1rem;
   }
 }
@@ -74,6 +75,10 @@ const closeMenu = () => {
   display: inline-block;
   padding: 1rem;
   overflow: hidden;
+
+  @media screen and (max-width: 800px) {
+    color: var(--color-text-invert);
+  }
 
   &:first-child::before {
     transform: translateX(200%);
@@ -103,6 +108,10 @@ const closeMenu = () => {
   &::before {
     transform: translateX(0%);
     border-radius: 20% 70% 40% 20% / 100% 90% 20% 10%;
+  }
+
+  @media screen and (max-width: 800px) {
+    color: var(--color-text-invert);
   }
 }
 

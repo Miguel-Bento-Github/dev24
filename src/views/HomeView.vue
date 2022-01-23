@@ -66,23 +66,31 @@ section {
 }
 
 .monkey-iframe-container {
+  margin: auto auto 2rem;
   height: max-content;
   overflow: hidden;
   border-radius: 1rem;
   height: 50vh;
-  box-shadow: 2px 2px 2px 1px var(--black);
+  width: 100%;
+  padding: 1rem;
+  box-shadow: inset 0 -2px 4px 1px var(--black), 2px 2px 2px 1px var(--black);
 }
 
 .monkey iframe {
-  height: 100%;
-  width: 100%;
+  height: 200%;
+  width: 200%;
+  border-radius: 1rem;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  transition: all 0.15s ease-in-out;
 }
 
 .devices {
   display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
 
   & > svg {
-    stroke-dashoffset: 0;
     animation: move 8s ease-in-out infinite alternate;
 
     @for $i from 1 through 3 {

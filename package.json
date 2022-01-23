@@ -8,13 +8,12 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview --port 5050",
+    "preview": "vite preview --host --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "pinia": "^2.0.9",
-    "remove": "^0.1.5",
     "vue": "^3.2.27",
     "vue-router": "^4.0.12"
   },

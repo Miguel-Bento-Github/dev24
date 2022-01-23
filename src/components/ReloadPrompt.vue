@@ -36,6 +36,7 @@ const close = async () => {
   background: rgb(#000, 25%);
   color: var(--white);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .pwa-message {

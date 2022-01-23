@@ -43,13 +43,15 @@
   --color-text: var(--black);
   --color-text-invert: var(--white);
   --color-link: var(--blue-dark);
+  --color-link-invert: var(--blue);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--dark-conic);
     --color-text: var(--white);
-    --color-text-invert: var(--white);
+    --color-text-invert: var(--black);
     --color-link: var(--blue);
+    --color-link-invert: var(--blue-dark);
   }
 }

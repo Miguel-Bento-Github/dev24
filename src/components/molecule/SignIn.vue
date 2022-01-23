@@ -21,18 +21,20 @@ watchEffect(() => {
     <TransitionGroup name="fade" mode="out-in">
       <GoogleButton key="button" v-if="!signInDisabled && !user.isSignedIn" />
       <UserAvatar key="avatar" v-if="user.isSignedIn" />
-      <button
-        key="cross"
-        aria-label="close sign in button"
-        type="button"
-        class="close"
-        v-else
-        @click="signInDisabled = !signInDisabled"
-      >
-        <IconCross :rotate="signInDisabled" />
-      </button>
     </TransitionGroup>
   </div>
+  <transition name="fade">
+    <button
+      key="cross"
+      aria-label="close sign in button"
+      type="button"
+      class="close"
+      v-if="!user.isSignedIn"
+      @click="signInDisabled = !signInDisabled"
+    >
+      <IconCross :rotate="signInDisabled" />
+    </button>
+  </transition>
 </template>
 
 <style lang="scss" scoped>
@@ -43,14 +45,10 @@ watchEffect(() => {
 }
 
 .close {
-  display: block;
   position: fixed;
-  bottom: 3.5rem;
+  bottom: 4rem;
   right: 1rem;
-  margin-left: auto;
   margin-bottom: 4px;
-  height: 40px;
-  width: 40px;
   cursor: pointer;
 
   &:hover {

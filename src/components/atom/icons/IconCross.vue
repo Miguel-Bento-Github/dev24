@@ -8,6 +8,8 @@ defineProps<{ rotate: boolean }>();
     :class="{ rotated: rotate }"
     fill="currentColor"
     version="1.1"
+    height="128pt"
+    width="128pt"
     viewBox="0 0 128 128"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -19,11 +21,13 @@ defineProps<{ rotate: boolean }>();
 
 <style lang="scss" scoped>
 .icon {
+  height: 24px;
+  width: 24px;
   transition: transform 0.15s ease-in-out;
 }
 
 .rotated {
   fill: var(--color-link);
-  transform: translateY(3rem) rotateZ(135deg);
+  transform: translateY(0) rotateZ(135deg);
 }
 </style>
