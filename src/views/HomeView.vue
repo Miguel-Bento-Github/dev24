@@ -30,8 +30,10 @@ const user = useUserStore();
       class="monkey"
     >
       <h3>{{ header }}</h3>
-      <div class="monkey-iframe-container">
-        <iframe frameborder="0" :src="link"></iframe>
+      <div class="monkey-wrapper">
+        <div class="monkey-iframe-container">
+          <iframe frameborder="0" :src="link"></iframe>
+        </div>
       </div>
       <a target="_blank" :href="link">{{ caption }}</a>
     </section>
@@ -65,23 +67,39 @@ section {
   margin-bottom: 15vh;
 }
 
-.monkey-iframe-container {
-  margin: auto auto 2rem;
-  height: max-content;
+.monkey-wrapper {
   overflow: hidden;
-  border-radius: 1rem;
-  height: 50vh;
-  width: 100%;
-  padding: 1rem;
+  border-radius: 32px;
+  margin: auto auto 2rem;
+  max-width: max-content;
+  max-height: max-content;
+  padding: 0.5rem;
   box-shadow: inset 0 -2px 4px 1px var(--black), 2px 2px 2px 1px var(--black);
 }
 
+.monkey-iframe-container {
+  position: relative;
+  height: max-content;
+  overflow: hidden;
+  height: 70vh;
+
+  @media screen and (min-width: 450px) {
+    width: 60vw;
+    aspect-ratio: 4 / 3;
+  }
+
+  @media screen and (min-width: 1000px) {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 .monkey iframe {
-  height: 200%;
-  width: 200%;
-  border-radius: 1rem;
-  transform: scale(0.5);
-  transform-origin: 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
   transition: all 0.15s ease-in-out;
 }
 
