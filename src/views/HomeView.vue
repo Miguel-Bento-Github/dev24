@@ -10,6 +10,7 @@ import IconMonitor from "@/components/atom/icons/IconMonitor.vue";
 
 useEntrance();
 const user = useUserStore();
+const year = new Date().getFullYear();
 </script>
 
 <template>
@@ -54,6 +55,9 @@ const user = useUserStore();
         {{ content.devices }}
       </p>
     </section>
+    <footer>
+      <small>Created by Dev24 with love 🧡 {{ year }}</small>
+    </footer>
   </article>
 
   <Transition name="fade">
