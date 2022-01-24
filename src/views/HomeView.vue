@@ -84,8 +84,10 @@ section {
 .monkey-iframe-container {
   position: relative;
   height: max-content;
+  width: max-content;
   overflow: hidden;
   height: 70vh;
+  aspect-ratio: 10 / 16;
 
   @media screen and (min-width: 450px) {
     width: 60vw;
