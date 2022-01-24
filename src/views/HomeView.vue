@@ -55,8 +55,10 @@ const year = new Date().getFullYear();
         {{ content.devices }}
       </p>
     </section>
-    <footer>
-      <small>Created by Dev24 with love 🧡 {{ year }}</small>
+    <footer class="footer">
+      Created by Dev24 with love
+      <span class="footer-emoji">🧡</span>
+      {{ year }}
     </footer>
   </article>
 
@@ -151,7 +153,8 @@ const year = new Date().getFullYear();
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 
   & > svg {
     animation: move 8s ease-in-out infinite alternate;
@@ -162,6 +165,19 @@ const year = new Date().getFullYear();
       }
     }
   }
+}
+
+.footer {
+  font-size: 1rem;
+  margin-top: 10rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(#000, 0.2);
+}
+
+.footer-emoji {
+  font-size: 1rem;
+  margin-right: 4px;
 }
 
 @keyframes move {
