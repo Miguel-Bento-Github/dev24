@@ -77,7 +77,7 @@ const closeMenu = () => {
   overflow: hidden;
 
   @media screen and (max-width: 800px) {
-    color: var(--color-text-invert);
+    color: var(--blue);
   }
 
   &:first-child::before {
@@ -101,6 +101,10 @@ const closeMenu = () => {
   position: relative;
   color: var(--color-text);
 
+  @media screen and (max-width: 800px) {
+    color: var(--white);
+  }
+
   &:first-child::before {
     transform: translateX(0%);
   }
@@ -108,10 +112,6 @@ const closeMenu = () => {
   &::before {
     transform: translateX(0%);
     border-radius: 20% 70% 40% 20% / 100% 90% 20% 10%;
-  }
-
-  @media screen and (max-width: 800px) {
-    color: var(--color-text-invert);
   }
 }
 

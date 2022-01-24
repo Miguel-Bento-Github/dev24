@@ -2,8 +2,8 @@
   <svg
     class="hand"
     version="1.1"
-    height="64pt"
-    width="64pt"
+    height="32pt"
+    width="32pt"
     viewBox="0 0 128 128"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -18,11 +18,18 @@
 
 <style lang="scss" scoped>
 .hand {
+  height: 2.5rem;
+  width: 2.5rem;
   display: inline-block;
   fill: none;
   stroke: currentColor;
   stroke-width: 2px;
   animation: move 0.35s 2.5s ease-in-out 2 alternate-reverse;
+
+  @media screen and (min-width: 800px) {
+    height: 4rem;
+    width: 4rem;
+  }
 }
 
 @keyframes move {

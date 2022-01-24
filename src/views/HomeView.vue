@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
 </script>
 
 <template>
-  <article>
+  <article class="content">
     <h2 class="headline">
       Hi
       <Transition name="fade" mode="out-in">
@@ -30,13 +30,13 @@ const year = new Date().getFullYear();
       :key="caption"
       class="monkey"
     >
-      <h3>{{ header }}</h3>
+      <h3 class="monkey-header">{{ header }}</h3>
       <div class="monkey-wrapper">
         <div class="monkey-iframe-container">
           <iframe frameborder="0" :src="link"></iframe>
         </div>
       </div>
-      <a target="_blank" :href="link">{{ caption }}</a>
+      <a class="monkey-link" target="_blank" :href="link">{{ caption }}</a>
     </section>
     <section>
       <h3 class="hidden">Browser support</h3>
@@ -66,9 +66,30 @@ const year = new Date().getFullYear();
 </template>
 
 <style lang="scss" scoped>
-section {
+.monkey {
   margin-top: 15vh;
   margin-bottom: 15vh;
+  text-align: center;
+
+  @media screen and (min-width: 800px) {
+    text-align: start;
+    display: grid;
+    align-items: flex-start;
+    justify-items: flex-start;
+    grid-template-areas:
+      "frame description"
+      "link .";
+    grid-template-columns: minmax(auto, 60%) minmax(auto, 40%);
+    gap: 0 32px;
+
+    &:nth-child(even) {
+      grid-template-areas:
+        "description frame"
+        ". link";
+      grid-template-columns: minmax(auto, 40%) minmax(auto, 60%);
+      justify-items: flex-end;
+    }
+  }
 }
 
 .monkey-wrapper {
@@ -79,6 +100,23 @@ section {
   max-height: max-content;
   padding: 0.5rem;
   box-shadow: inset 0 -2px 4px 1px var(--black), 2px 2px 2px 1px var(--black);
+
+  @media screen and (min-width: 800px) {
+    margin: auto 0 2rem;
+  }
+}
+
+.monkey-header {
+  grid-area: description;
+}
+
+.monkey-wrapper {
+  grid-area: frame;
+}
+
+.monkey-link {
+  width: max-content;
+  grid-area: link;
 }
 
 .monkey-iframe-container {
@@ -90,7 +128,7 @@ section {
   aspect-ratio: 10 / 16;
 
   @media screen and (min-width: 450px) {
-    width: 60vw;
+    height: 40vh;
     aspect-ratio: 4 / 3;
   }
 
@@ -112,6 +150,7 @@ section {
 .devices {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   margin-bottom: 1rem;
 
   & > svg {

@@ -6,9 +6,9 @@
     stroke-dasharray="100"
     stroke-dashoffset="0"
     version="1.1"
-    height="128pt"
-    width="128pt"
-    viewBox="0 0 128 128"
+    height="104pt"
+    width="64pt"
+    viewBox="32 0 64 128"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
