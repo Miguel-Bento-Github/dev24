@@ -14,23 +14,37 @@ const year = new Date().getFullYear();
 </script>
 
 <template>
+  <button type="button" class="contact">contact me</button>
   <article class="content">
-    <h2 class="headline">
+    <h1 class="headline">
       Hi
       <Transition name="fade" mode="out-in">
         <span v-if="user.name">{{ user.name }}</span>
         <IconHand v-else />
       </Transition>
-    </h2>
-    <p class="intro">
-      {{ content.intro }}
-    </p>
+    </h1>
+    <div class="intro">
+      <p>
+        {{ content.intro }}
+      </p>
+      <section class="monkey">
+        <h2 class="monkey-header hidden">mr-monkey.net</h2>
+        <div class="monkey-wrapper">
+          <div class="monkey-iframe-container">
+            <iframe frameborder="0" :src="content.monkey.link"></iframe>
+          </div>
+        </div>
+        <a class="monkey-link" target="_blank" :href="content.monkey.link">
+          {{ content.monkey.caption }}
+        </a>
+      </section>
+    </div>
     <section
       v-for="{ header, link, caption } in content.sections"
       :key="caption"
       class="monkey"
     >
-      <h3 class="monkey-header">{{ header }}</h3>
+      <h2 class="monkey-header">{{ header }}</h2>
       <div class="monkey-wrapper">
         <div class="monkey-iframe-container">
           <iframe frameborder="0" :src="link"></iframe>
@@ -68,12 +82,28 @@ const year = new Date().getFullYear();
 </template>
 
 <style lang="scss" scoped>
+.intro {
+  display: grid;
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .monkey {
+    margin: 0;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
 .monkey {
   margin-top: 15vh;
   margin-bottom: 15vh;
   text-align: center;
 
   @media screen and (min-width: 800px) {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
     text-align: start;
     display: grid;
     align-items: flex-start;

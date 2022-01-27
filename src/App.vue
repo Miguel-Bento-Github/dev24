@@ -25,7 +25,7 @@ user.setUser();
 @import "@/scss/boot.scss";
 
 #app {
-  max-width: 1280px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   font-weight: normal;
