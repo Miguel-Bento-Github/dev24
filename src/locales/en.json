@@ -1,13 +1,13 @@
 {
-  "intro": "Through Dev24, I offer my web development skills to create beautiful and user-friendly websites for you.",
-  "disclaimer": "None of the content underneath is a mockup, they are real apps that you can use even through these small frames, it's like a portal to another website and you can open it externally on a browser page by clicking the links underneath each frame.",
+  "hero": "Create something special, something unique, something like you.",
   "devices": "From your Smartphone to your 8k OLED Screen. Anything is possible with the state of the art that animations I provide.",
   "browserSupport": "I build for Chrome, Firefox, Safari, Edge, and virtually any modern browser",
-  "monkey": {
-    "link": "https://www.mr-monkey.net/",
-    "caption": "mr-monkey.net"
-  },
   "sections": [
+    {
+      "header": "Through Dev24, I offer my web development skills to create beautiful and user-friendly websites for you. It might be that you need a digital card, here's mine.",
+      "link": "https://www.mr-monkey.net/",
+      "caption": "mr-monkey.net"
+    },
     {
       "header": "By keeping up with the latest technologies, I'm able to offer special and unique content",
       "link": "https://mix-blend-mode.netlify.app/",

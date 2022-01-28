@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import GoogleButton from "@/components/atom/GoogleButton.vue";
-import UserAvatar from "@/components/UserAvatar.vue";
+import GoogleButton from "@/components/small/GoogleButton.vue";
+import UserAvatar from "@/components/small/UserAvatar.vue";
 import { useUserStore } from "@/stores/user";
-import { computed, ref, watchEffect } from "vue";
-import IconCross from "@/components/atom/icons/IconCross.vue";
+import { ref, watchEffect } from "vue";
+import IconCross from "@/components/icons/IconCross.vue";
+
 const user = useUserStore();
 
 const signInDisabled = ref(sessionStorage["sign-in-disabled"]);
-const showSignIn = computed(() => !signInDisabled.value || user.isSignedIn);
 
 watchEffect(() => {
   if (signInDisabled.value) {

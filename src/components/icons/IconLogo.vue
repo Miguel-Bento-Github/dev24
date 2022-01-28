@@ -7,7 +7,10 @@
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 464 125"
+    labelledby="logoTitle"
+    itemprop="logo"
   >
+    <title id="logoTitle">logo icon</title>
     <g transform="translate(-14,160) scale(0.1,-0.1)">
       <linearGradient
         id="gradient"

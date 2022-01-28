@@ -11,7 +11,9 @@ defineProps<{ isDrawing: boolean }>();
     version="1.1"
     viewBox="0 0 128 128"
     xmlns="http://www.w3.org/2000/svg"
+    labelledby="emailTitle"
   >
+    <title id="emailTitle">email icon</title>
     <path
       pathLength="100"
       d="m74.699 16.738-6.1641 3.5586c-0.57812 0.33203-0.77734 1.0703-0.44141 1.6484 0.33594 0.57813 1.0742 0.77344 1.6484 0.44141l6.168-3.5586c0.57812-0.33203 0.77734-1.0703 0.44141-1.6484-0.33594-0.57813-1.0742-0.77734-1.6523-0.44141z"

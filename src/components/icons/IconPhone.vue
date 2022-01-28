@@ -10,7 +10,9 @@
     width="64pt"
     viewBox="32 0 64 128"
     xmlns="http://www.w3.org/2000/svg"
+    labelledby="phoneTitle"
   >
+    <title id="phoneTitle">phone icon</title>
     <path
       pathLength="100"
       d="m32.684 10.668v106.67h62.629l0.003906-106.67zm61.297 105.33h-59.961v-104h59.965v104z"

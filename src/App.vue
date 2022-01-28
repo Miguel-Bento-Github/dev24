@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import NavBar from "./components/NavBar.vue";
+import NavBar from "./components/medium/NavBar.vue";
 import { useUserStore } from "./stores/user";
 import ReloadPrompt from "./components/ReloadPrompt.vue";
 import { defineAsyncComponent } from "vue";
@@ -25,7 +25,7 @@ user.setUser();
 @import "@/scss/boot.scss";
 
 #app {
-  max-width: 1400px;
+  max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
   font-weight: normal;

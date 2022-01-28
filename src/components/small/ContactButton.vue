@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import IconEmail from "./icons/IconEmail.vue";
+import IconEmail from "@/components/icons/IconEmail.vue";
 const isDrawing = ref(false);
 </script>
 
@@ -18,6 +18,7 @@ const isDrawing = ref(false);
 
 <style lang="scss" scoped>
 .contact {
+  margin-top: 4rem;
   height: max-content;
   width: max-content;
   display: flex;
@@ -37,8 +38,8 @@ const isDrawing = ref(false);
   }
 
   &:hover {
-    box-shadow: inset 0 -2px 2px 2px var(--color-text-invert),
-      2px 2px 6px var(--color-text-invert);
+    filter: invert(100%);
+    background: #000;
   }
 
   &:active {

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import IconLogo from "@/components/atom/icons/IconLogo.vue";
+import IconLogo from "@/components/icons/IconLogo.vue";
 import router from "@/router";
 import { computed, ref, watchEffect } from "vue";
-import IconMenu from "./atom/icons/IconMenu.vue";
+import IconMenu from "@/components/icons/IconMenu.vue";
 
 const isSmallScreen = computed(
   () => window.matchMedia("(max-width: 800px)").matches

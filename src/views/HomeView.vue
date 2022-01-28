@@ -1,23 +1,53 @@
 <script setup lang="ts">
-import SignIn from "@/components/molecule/SignIn.vue";
+import SignIn from "@/components/medium/SignIn.vue";
 import { useEntrance } from "@/hooks/useEntrance";
 import { useUserStore } from "@/stores/user";
 import content from "@/locales/en.json";
-import IconHand from "@/components/atom/icons/IconHand.vue";
-import IconPhone from "@/components/atom/icons/IconPhone.vue";
-import IconTablet from "@/components/atom/icons/IconTablet.vue";
-import IconMonitor from "@/components/atom/icons/IconMonitor.vue";
-import CSSDoodle from "@/components/atom/CSSDoodle.vue";
-import ContactButton from "@/components/atom/ContactButton.vue";
+import IconHand from "@/components/icons/IconHand.vue";
+import IconPhone from "@/components/icons/IconPhone.vue";
+import IconTablet from "@/components/icons/IconTablet.vue";
+import IconMonitor from "@/components/icons/IconMonitor.vue";
+import CSSDoodle from "@/components/small/CSSDoodle.vue";
+import ContactButton from "@/components/small/ContactButton.vue";
+import HomeSection from "@/components/medium/HomeSection.vue";
+import gsap from "gsap";
+import { onMounted } from "vue";
 
 useEntrance();
 const user = useUserStore();
 const year = new Date().getFullYear();
+
+onMounted(() => {
+  const frames: HTMLElement[] = gsap.utils.toArray(".monkey-wrapper");
+  const texts: HTMLElement[] = gsap.utils.toArray(".monkey-header");
+  frames.forEach((ref, i) => {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        start: "top center",
+        trigger: ref,
+        scrub: i * 0.2,
+      },
+    });
+    timeline
+      .from(ref, {
+        autoAlpha: 0.4,
+        x: "30px",
+      })
+      .from(
+        texts[i],
+        {
+          x: "-30px",
+        },
+        "<"
+      );
+  });
+});
 </script>
 
 <template>
   <article class="content">
-    <section class="hero">
+    <section itemscope itemtype="https://schema.org/Service" class="hero">
+      <meta itemprop="serviceType" content="Website development" />
       <header>
         <h1 class="h2 headline">
           Welcome
@@ -26,42 +56,20 @@ const year = new Date().getFullYear();
             <IconHand v-else />
           </Transition>
         </h1>
-        <h2 class="h3">
-          Create something special, something unique, something like you.
+        <h2 class="h3 description">
+          {{ content.hero }}
         </h2>
         <ContactButton />
       </header>
-      <div class="wrapper"><CSSDoodle /></div>
+      <div class="doodle-wrapper"><CSSDoodle /></div>
     </section>
-    <div class="intro">
-      <p>
-        {{ content.intro }}
-      </p>
-      <section class="monkey">
-        <h2 class="monkey-header hidden">mr-monkey.net</h2>
-        <div class="monkey-wrapper">
-          <div class="monkey-iframe-container">
-            <iframe frameborder="0" :src="content.monkey.link"></iframe>
-          </div>
-          <a class="monkey-link" target="_blank" :href="content.monkey.link">
-            {{ content.monkey.caption }}
-          </a>
-        </div>
-      </section>
-    </div>
-    <!-- <section
+    <HomeSection
       v-for="{ header, link, caption } in content.sections"
+      :header="header"
+      :link="link"
+      :caption="caption"
       :key="caption"
-      class="monkey"
-    >
-      <p class="monkey-header">{{ header }}</p>
-      <div class="monkey-wrapper">
-        <div class="monkey-iframe-container">
-          <iframe frameborder="0" :src="link"></iframe>
-        </div>
-      </div>
-      <a class="monkey-link" target="_blank" :href="link">{{ caption }}</a>
-    </section> -->
+    />
     <section>
       <h3 class="hidden">Browser support</h3>
       <p>
@@ -86,9 +94,7 @@ const year = new Date().getFullYear();
     </footer>
   </article>
 
-  <Transition name="fade">
-    <SignIn />
-  </Transition>
+  <SignIn />
 </template>
 
 <style lang="scss" scoped>
@@ -98,128 +104,18 @@ const year = new Date().getFullYear();
 
   @media screen and (min-width: 800px) {
     grid-template-columns: 1fr 1fr;
-    margin-top: 15vh;
-    margin-bottom: 15vh;
+    margin-top: 15rem;
+    margin-bottom: 15rem;
   }
 
-  .wrapper {
+  .doodle-wrapper {
     display: flex;
     justify-content: center;
-  }
-}
-
-.intro {
-  display: grid;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-
-  @media screen and (min-width: 800px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .monkey {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .monkey-link {
-    padding-left: 1rem;
   }
 }
 </style>
 
 <style lang="scss" scoped>
-.monkey {
-  display: grid;
-  grid-template-areas:
-    "link"
-    "frame"
-    "description";
-  align-items: flex-start;
-  justify-items: center;
-  margin-top: 15vh;
-  margin-bottom: 15vh;
-  text-align: center;
-
-  @media screen and (min-width: 800px) {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    text-align: start;
-    display: grid;
-    align-items: flex-start;
-    justify-items: flex-start;
-    grid-template-areas:
-      "frame description"
-      "link .";
-    grid-template-columns: minmax(auto, 60%) minmax(auto, 40%);
-    gap: 0 32px;
-
-    &:nth-child(even) {
-      grid-template-areas:
-        "description frame"
-        ". link";
-      grid-template-columns: minmax(auto, 40%) minmax(auto, 60%);
-      justify-items: flex-end;
-    }
-  }
-}
-
-.monkey-wrapper {
-  overflow: hidden;
-  border-radius: 32px;
-  margin: auto auto 2rem;
-  max-width: max-content;
-  max-height: max-content;
-  padding: 0.5rem;
-  box-shadow: inset 0 -2px 4px 1px var(--black), 2px 2px 2px 1px var(--black);
-
-  @media screen and (min-width: 800px) {
-    margin: auto 0 2rem;
-  }
-}
-
-.monkey-header {
-  grid-area: description;
-}
-
-.monkey-wrapper {
-  grid-area: frame;
-}
-
-.monkey-link {
-  width: max-content;
-  grid-area: link;
-}
-
-.monkey-iframe-container {
-  position: relative;
-  height: max-content;
-  width: max-content;
-  overflow: hidden;
-  height: 40vh;
-  aspect-ratio: 10 / 16;
-
-  @media screen and (min-width: 450px) {
-    height: 30vh;
-    aspect-ratio: 4 / 3;
-  }
-
-  @media screen and (min-width: 1000px) {
-    aspect-ratio: 16 / 9;
-  }
-}
-
-.monkey iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 24px;
-  transition: all 0.15s ease-in-out;
-}
-
 .devices {
   display: flex;
   justify-content: space-evenly;
