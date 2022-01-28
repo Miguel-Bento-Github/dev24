@@ -32,7 +32,7 @@ watchEffect(() => {
       v-if="!user.isSignedIn"
       @click="signInDisabled = !signInDisabled"
     >
-      <IconCross :rotate="signInDisabled" />
+      <IconCross :rotate="!!signInDisabled" />
     </button>
   </transition>
 </template>

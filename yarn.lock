@@ -2074,6 +2074,11 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+css-doodle@^0.24.2:
+  version "0.24.2"
+  resolved "https://registry.yarnpkg.com/css-doodle/-/css-doodle-0.24.2.tgz#2cfd73b75f2637034e14965df00c4a72043d9479"
+  integrity sha512-DdujrrV88JT+9PlLMyvano4t14uSK3gvSC57S9/5fUvzakn3bfRCX+h3/BwavPWkO1AqKCtYBEpOpRgou846mw==
+
 csstype@^2.6.8:
   version "2.6.19"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.19.tgz#feeb5aae89020bb389e1f63669a5ed490e391caa"

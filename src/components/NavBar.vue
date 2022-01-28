@@ -27,6 +27,7 @@ const closeMenu = () => {
   <header @focusout="closeMenu" class="wrapper">
     <IconLogo />
     <button
+      class="dots"
       type="button"
       v-if="isSmallScreen"
       @click="isMenuOpen = !isMenuOpen"
@@ -55,9 +56,19 @@ const closeMenu = () => {
   margin-bottom: 2rem;
 }
 
+.dots {
+  @media screen and (max-width: 800px) {
+    position: fixed;
+    z-index: 10;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
 .nav {
   @media screen and (max-width: 800px) {
     position: fixed;
+    z-index: 10;
     top: 5rem;
     right: 2rem;
     display: flex;

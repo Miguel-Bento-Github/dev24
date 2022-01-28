@@ -5,7 +5,13 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes("css-doodle"),
+        },
+      },
+    }),
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: [

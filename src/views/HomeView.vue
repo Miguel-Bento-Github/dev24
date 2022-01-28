@@ -7,6 +7,8 @@ import IconHand from "@/components/atom/icons/IconHand.vue";
 import IconPhone from "@/components/atom/icons/IconPhone.vue";
 import IconTablet from "@/components/atom/icons/IconTablet.vue";
 import IconMonitor from "@/components/atom/icons/IconMonitor.vue";
+import CSSDoodle from "@/components/atom/CSSDoodle.vue";
+import ContactButton from "@/components/atom/ContactButton.vue";
 
 useEntrance();
 const user = useUserStore();
@@ -14,15 +16,23 @@ const year = new Date().getFullYear();
 </script>
 
 <template>
-  <button type="button" class="contact">contact me</button>
   <article class="content">
-    <h1 class="headline">
-      Hi
-      <Transition name="fade" mode="out-in">
-        <span v-if="user.name">{{ user.name }}</span>
-        <IconHand v-else />
-      </Transition>
-    </h1>
+    <section class="hero">
+      <header>
+        <h1 class="h2 headline">
+          Welcome
+          <Transition name="fade" mode="out-in">
+            <span v-if="user.name">{{ user.name }}</span>
+            <IconHand v-else />
+          </Transition>
+        </h1>
+        <h2 class="h3">
+          Create something special, something unique, something like you.
+        </h2>
+        <ContactButton />
+      </header>
+      <div class="wrapper"><CSSDoodle /></div>
+    </section>
     <div class="intro">
       <p>
         {{ content.intro }}
@@ -33,25 +43,25 @@ const year = new Date().getFullYear();
           <div class="monkey-iframe-container">
             <iframe frameborder="0" :src="content.monkey.link"></iframe>
           </div>
+          <a class="monkey-link" target="_blank" :href="content.monkey.link">
+            {{ content.monkey.caption }}
+          </a>
         </div>
-        <a class="monkey-link" target="_blank" :href="content.monkey.link">
-          {{ content.monkey.caption }}
-        </a>
       </section>
     </div>
-    <section
+    <!-- <section
       v-for="{ header, link, caption } in content.sections"
       :key="caption"
       class="monkey"
     >
-      <h2 class="monkey-header">{{ header }}</h2>
+      <p class="monkey-header">{{ header }}</p>
       <div class="monkey-wrapper">
         <div class="monkey-iframe-container">
           <iframe frameborder="0" :src="link"></iframe>
         </div>
       </div>
       <a class="monkey-link" target="_blank" :href="link">{{ caption }}</a>
-    </section>
+    </section> -->
     <section>
       <h3 class="hidden">Browser support</h3>
       <p>
@@ -82,8 +92,26 @@ const year = new Date().getFullYear();
 </template>
 
 <style lang="scss" scoped>
+.hero {
+  display: grid;
+  margin-bottom: 1rem;
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .intro {
   display: grid;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 
   @media screen and (min-width: 800px) {
     grid-template-columns: 1fr 1fr;
@@ -91,12 +119,25 @@ const year = new Date().getFullYear();
 
   .monkey {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .monkey-link {
+    padding-left: 1rem;
   }
 }
 </style>
 
 <style lang="scss" scoped>
 .monkey {
+  display: grid;
+  grid-template-areas:
+    "link"
+    "frame"
+    "description";
+  align-items: flex-start;
+  justify-items: center;
   margin-top: 15vh;
   margin-bottom: 15vh;
   text-align: center;
@@ -156,11 +197,11 @@ const year = new Date().getFullYear();
   height: max-content;
   width: max-content;
   overflow: hidden;
-  height: 70vh;
+  height: 40vh;
   aspect-ratio: 10 / 16;
 
   @media screen and (min-width: 450px) {
-    height: 40vh;
+    height: 30vh;
     aspect-ratio: 4 / 3;
   }
 
@@ -202,7 +243,7 @@ const year = new Date().getFullYear();
   margin-top: 10rem;
   padding: 1rem;
   border-radius: 1rem;
-  background: rgba(#000, 0.2);
+  background: rgb(#000, 20%);
 }
 
 .footer-emoji {
