@@ -12,7 +12,7 @@ const isDrawing = ref(false);
     class="contact"
   >
     <IconEmail :is-drawing="isDrawing" />
-    <span>Email me</span>
+    <span class="email-text">Email me</span>
   </a>
 </template>
 
@@ -39,7 +39,8 @@ const isDrawing = ref(false);
 
   &:hover {
     filter: invert(100%);
-    background: #000;
+    background: var(--color-background);
+    color: var(--color-text);
   }
 
   &:active {

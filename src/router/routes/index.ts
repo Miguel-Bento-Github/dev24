@@ -14,20 +14,6 @@ export const routes = [
     },
   },
   {
-    path: "/about",
-    name: "about",
-    component: () => import("@/views/AboutView.vue"),
-    meta: {
-      title: "About",
-      metaTags: [
-        {
-          name: "description",
-          content: "About page with content about the company.",
-        },
-      ],
-    },
-  },
-  {
     path: "/privacy-policy",
     name: "privacy",
     component: () => import("@/views/PrivacyPolicy.vue"),

@@ -38,7 +38,6 @@ const closeMenu = () => {
     <transition name="fade">
       <nav class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Home</RouterLink>
-        <RouterLink class="router-link" to="/about">What I do</RouterLink>
         <RouterLink class="router-link" to="/privacy-policy">
           Privacy Policy
         </RouterLink>
@@ -48,12 +47,22 @@ const closeMenu = () => {
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/boot.scss" as *;
+@use "@/scss/pseudo.scss" as *;
 
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem 2rem;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
+  background: linear-gradient(to bottom, rgb(#000, 10%), transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  isolation: isolate;
+  z-index: 10;
 }
 
 .dots {

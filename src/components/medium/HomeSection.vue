@@ -11,10 +11,10 @@ defineProps<{
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
-        <iframe frameborder="0" :src="link"></iframe>
+        <iframe loading="lazy" frameborder="0" :src="link"></iframe>
       </div>
     </div>
-    <a class="monkey-link" target="_blank" rel="noopener" :href="href">
+    <a class="monkey-link" target="_blank" rel="noopener" :href="link">
       {{ caption }}
     </a>
   </section>
@@ -29,13 +29,14 @@ defineProps<{
     "description";
   align-items: flex-start;
   justify-items: center;
-  margin-top: 15rem;
-  margin-bottom: 15rem;
+  margin-top: 30vh;
+  margin-bottom: 30vh;
   text-align: center;
+  min-height: 50vh;
 
   @media screen and (min-width: 800px) {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-top: 25vh;
+    margin-bottom: 25vh;
     text-align: start;
     display: grid;
     align-items: center;
@@ -57,11 +58,14 @@ defineProps<{
 }
 
 .monkey-wrapper {
+  grid-area: frame;
   overflow: hidden;
   border-radius: 32px;
   margin: auto auto 2rem;
   max-width: max-content;
   max-height: max-content;
+  width: 100%;
+  height: auto;
   padding: 0.5rem;
   box-shadow: inset 0 -2px 4px 1px var(--black), 2px 2px 2px 1px var(--black);
 
@@ -74,29 +78,28 @@ defineProps<{
   grid-area: description;
 }
 
-.monkey-wrapper {
-  grid-area: frame;
-}
-
 .monkey-link {
   width: max-content;
   grid-area: link;
+  padding: 0 8px;
 }
 
 .monkey-iframe-container {
   position: relative;
-  height: max-content;
-  width: max-content;
+  height: auto;
+  width: 40vw;
   overflow: hidden;
-  height: 40vh;
   aspect-ratio: 10 / 16;
 
   @media screen and (min-width: 450px) {
-    height: 30vh;
+    width: auto;
+    height: 35vh;
     aspect-ratio: 4 / 3;
   }
 
   @media screen and (min-width: 1000px) {
+    width: 40vw;
+    height: auto;
     aspect-ratio: 16 / 9;
   }
 }

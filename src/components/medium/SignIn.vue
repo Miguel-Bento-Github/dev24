@@ -29,6 +29,7 @@ watchEffect(() => {
       aria-label="close sign in button"
       type="button"
       class="close"
+      :class="{ closed: !!signInDisabled }"
       v-if="!user.isSignedIn"
       @click="signInDisabled = !signInDisabled"
     >
@@ -50,9 +51,15 @@ watchEffect(() => {
   right: 1rem;
   margin-bottom: 4px;
   cursor: pointer;
+  transition: bottom 0.15s ease-in-out;
 
   &:hover {
     filter: drop-shadow(0 0 1px #e0e0e0);
   }
+}
+
+.closed {
+  bottom: 1rem;
+  transition-delay: 0.3s;
 }
 </style>

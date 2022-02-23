@@ -1,8 +1,8 @@
 @import "./css/reset.css";
 @import "./css/color";
 @import "./font/silka.css";
-@import url("./css/typography-mobile.css") (max-width: 940px);
-@import url("./css/typography.css") (min-width: 940px);
+@import url("./css/typography-mobile.css") (max-width: 1024px);
+@import url("./css/typography.css") (min-width: 1024px);
 
 body {
   min-height: 100vh;

@@ -46,6 +46,10 @@
   --color-link-invert: var(--blue);
 }
 
+html {
+  background: #65303a;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--dark-conic);

@@ -2,11 +2,11 @@
 import { RouterView } from "vue-router";
 import NavBar from "./components/medium/NavBar.vue";
 import { useUserStore } from "./stores/user";
-import ReloadPrompt from "./components/ReloadPrompt.vue";
+import ReloadPrompt from "./components/small/ReloadPrompt.vue";
 import { defineAsyncComponent } from "vue";
 const shouldReload =
   typeof window !== "undefined"
-    ? defineAsyncComponent(() => import("@/components/ReloadPrompt.vue"))
+    ? defineAsyncComponent(() => import("@/components/small/ReloadPrompt.vue"))
     : null;
 
 const user = useUserStore();
@@ -16,7 +16,10 @@ user.setUser();
 <template>
   <div role="img" class="background"></div>
   <NavBar />
-  <RouterView />
+
+  <div class="main-view">
+    <RouterView />
+  </div>
   <ReloadPrompt v-if="shouldReload" />
 </template>
 
@@ -44,5 +47,11 @@ user.setUser();
   height: 100vh;
   width: 100vw;
   background: var(--color-background);
+}
+</style>
+
+<style lang="scss" scoped>
+.main-view {
+  margin-top: 5rem;
 }
 </style>

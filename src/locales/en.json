@@ -1,15 +1,16 @@
 {
-  "hero": "Create something special, something unique, something like you.",
-  "devices": "From your Smartphone to your 8k OLED Screen. Anything is possible with the state of the art that animations I provide.",
+  "welcome": "Welcome",
+  "hero": "Get the website that fits your needs by creating something special, something unique, something just like you.",
+  "devices": "From your Smartphone to your 8k OLED Screen. Anything is possible with the state of the art animations I provide.",
   "browserSupport": "I build for Chrome, Firefox, Safari, Edge, and virtually any modern browser",
   "sections": [
     {
-      "header": "Through Dev24, I offer my web development skills to create beautiful and user-friendly websites for you. It might be that you need a digital card, here's mine.",
+      "header": "Through Dev24, we offer specialized web development skills to create beautiful and user-friendly websites for you. If you need a digital card, we can provide your own customized card.",
       "link": "https://www.mr-monkey.net/",
       "caption": "mr-monkey.net"
     },
     {
-      "header": "By keeping up with the latest technologies, I'm able to offer special and unique content",
+      "header": "By keeping up with the latest technologies, we're able to offer special and unique content",
       "link": "https://mix-blend-mode.netlify.app/",
       "caption": "mix-blend-mode"
     },
@@ -19,12 +20,12 @@
       "caption": "claymorphic"
     },
     {
-      "header": "A simple photo gallery can go a long way",
+      "header": "A photo gallery to show off all of your fantastic content can bring more customized experiences.",
       "link": "https://miguel-bento-github.github.io/photo-gallery/",
       "caption": "photo-gallery"
     },
     {
-      "header": "Maybe neumorphism is your thing",
+      "header": "After skeuomorphic design, neumorphism is one of the latest trends in design, is this your next look?",
       "link": "https://miguel-bento-github.github.io/neumorphism/",
       "caption": "neumorphism"
     }
