@@ -2,16 +2,19 @@
 import { ref } from "vue";
 import IconEmail from "@/components/icons/IconEmail.vue";
 const isDrawing = ref(false);
+const isActive = ref(false);
 </script>
 
 <template>
   <a
     @mouseenter="isDrawing = true"
-    href="mailto:bento-miguel@outlook.com"
+    @mouseleave="isDrawing = isActive ? true : false"
+    @click="isActive = true"
+    href="mailto:bento-miguel@outlook.com&subject=Contact%20from%20website&body=Hi dev24"
     type="button"
     class="contact"
   >
-    <IconEmail :is-drawing="isDrawing" />
+    <IconEmail :isDrawing="isDrawing" :isActive="isActive" />
     <span class="email-text">Email me</span>
   </a>
 </template>

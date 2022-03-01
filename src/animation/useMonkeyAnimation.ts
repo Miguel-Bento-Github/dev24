@@ -1,3 +1,4 @@
+import { useScreenQuery } from "@/hooks/useScreenQuery";
 import gsap from "gsap";
 import { onMounted } from "vue";
 
@@ -5,6 +6,10 @@ export const useMonkeyAnimation = () => {
   onMounted(() => {
     const frames: HTMLElement[] = gsap.utils.toArray(".monkey-wrapper");
     const texts: HTMLElement[] = gsap.utils.toArray(".monkey-header");
+    const { isMatch } = useScreenQuery("(min-width: 550px)");
+
+    // create some space between the frames and the footer
+    gsap.set(frames[frames.length - 1].parentElement, { marginBottom: "15vh" });
 
     frames.forEach((ref, i) => {
       if (!i) {
@@ -22,10 +27,11 @@ export const useMonkeyAnimation = () => {
         });
         return;
       }
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           start: "-=300 center",
-          end: "bottom +=100",
+          end: "-=100 +=200",
           trigger: ref,
           scrub: i * 0.2,
         },
@@ -33,20 +39,20 @@ export const useMonkeyAnimation = () => {
 
       timeline
         .from(ref.parentElement, {
-          y: "300px",
+          y: isMatch.value ? "300px" : "50px",
         })
         .from(
           ref,
           {
             autoAlpha: 0.4,
-            x: "30px",
+            x: isMatch.value ? "30px" : "",
           },
           "<"
         )
         .from(
           texts[i],
           {
-            x: "-15px",
+            x: isMatch.value ? "-15px" : "",
           },
           "<"
         );

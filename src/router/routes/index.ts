@@ -14,6 +14,20 @@ export const routes = [
     },
   },
   {
+    path: "/work",
+    name: "Work",
+    component: () => import("@/views/WorkView.vue"),
+    meta: {
+      title: "Work",
+      metaTags: [
+        {
+          name: "description",
+          content: "Some of my web development work.",
+        },
+      ],
+    },
+  },
+  {
     path: "/privacy-policy",
     name: "privacy",
     component: () => import("@/views/PrivacyPolicy.vue"),

@@ -48,9 +48,10 @@ import IconTablet from "@/components/icons/IconTablet.vue";
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
 
   @media screen and (min-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+
     & > p {
       padding-left: 6rem;
       padding-right: 6rem;

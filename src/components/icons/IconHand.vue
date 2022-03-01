@@ -26,11 +26,14 @@
   fill: none;
   stroke: currentColor;
   stroke-width: 2px;
-  animation: move 0.35s 2.5s ease-in-out 2 alternate-reverse;
 
   @media screen and (min-width: 800px) {
     height: 4rem;
     width: 4rem;
+  }
+
+  &:hover {
+    animation: move 0.35s ease-in-out 2 alternate-reverse;
   }
 }
 

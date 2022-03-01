@@ -1,17 +1,38 @@
 <script setup lang="ts">
-defineProps<{
+import { useElementObserver } from "@/hooks/useElementObserver";
+import { ref, watch } from "vue";
+import LoadingSpinner from "../small/LoadingSpinner.vue";
+
+const props = defineProps<{
   header: string;
   link: string;
   caption: string;
+  i: number;
 }>();
+
+const src = ref(!props.i ? props.link : "");
+const { elementRef, isIntersecting } = useElementObserver();
+const isLoading = ref(true);
+watch(isIntersecting, (newValue: boolean) => {
+  if (newValue) src.value = props.link;
+
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 500);
+});
 </script>
 
 <template>
-  <section class="monkey">
+  <section ref="elementRef" class="monkey">
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
-        <iframe loading="lazy" frameborder="0" :src="link"></iframe>
+        <iframe v-if="src" loading="lazy" frameborder="0" :src="src"></iframe>
+        <LoadingSpinner
+          v-if="isLoading"
+          :class="{ disappear: src }"
+          class="loading"
+        />
       </div>
     </div>
     <a class="monkey-link" target="_blank" rel="noopener" :href="link">
@@ -21,7 +42,9 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
+@use "@/scss/pseudo.scss" as *;
 .monkey {
+  position: relative;
   display: grid;
   grid-template-areas:
     "link"
@@ -29,15 +52,17 @@ defineProps<{
     "description";
   align-items: flex-start;
   justify-items: center;
-  margin-top: 30vh;
-  margin-bottom: 30vh;
+  padding: 30vh 1rem;
   text-align: center;
   min-height: 50vh;
+  background: linear-gradient(
+    transparent 5%,
+    rgb(#000, 20%) 50%,
+    transparent 100%
+  );
 
   @media screen and (min-width: 800px) {
-    margin-top: 25vh;
-    margin-bottom: 25vh;
-    text-align: start;
+    padding: 15vh 2rem;
     display: grid;
     align-items: center;
     justify-items: flex-start;
@@ -46,6 +71,8 @@ defineProps<{
       "link .";
     grid-template-columns: minmax(auto, 60%) minmax(auto, 40%);
     gap: 0 32px;
+    text-align: start;
+    background: transparent;
 
     &:nth-child(even) {
       grid-template-areas:
@@ -54,6 +81,19 @@ defineProps<{
       grid-template-columns: minmax(auto, 40%) minmax(auto, 60%);
       justify-items: flex-end;
     }
+  }
+
+  &::before {
+    z-index: -1;
+    @include pseudo;
+    left: -100vw;
+    height: 100%;
+    width: 200vw;
+    background: linear-gradient(
+      transparent 0%,
+      rgb(#000, 10%) 50%,
+      transparent 100%
+    );
   }
 }
 
@@ -81,13 +121,13 @@ defineProps<{
 .monkey-link {
   width: max-content;
   grid-area: link;
-  padding: 0 8px;
+  padding: 8px;
 }
 
 .monkey-iframe-container {
   position: relative;
   height: auto;
-  width: 40vw;
+  width: 80vw;
   overflow: hidden;
   aspect-ratio: 10 / 16;
 
@@ -112,5 +152,17 @@ defineProps<{
   width: 100%;
   border-radius: 24px;
   transition: all 0.15s ease-in-out;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.45s ease-in-out;
+
+  &.disappear {
+    opacity: 0;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "css-doodle";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 class Doodle extends HTMLElement {
   constructor() {
@@ -13,12 +13,6 @@ class Doodle extends HTMLElement {
 }
 
 const doodle = ref(document.createElement("css-doodle") as Doodle);
-
-onMounted(() => {
-  setTimeout(() => {
-    setInterval(() => doodle.value.update(), 5000);
-  }, 250);
-});
 </script>
 
 <template>

@@ -38,6 +38,7 @@ const closeMenu = () => {
     <transition name="fade">
       <nav class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Home</RouterLink>
+        <RouterLink class="router-link" to="/work">Work</RouterLink>
         <RouterLink class="router-link" to="/privacy-policy">
           Privacy Policy
         </RouterLink>
@@ -59,8 +60,8 @@ const closeMenu = () => {
   justify-content: space-between;
   margin-bottom: 2rem;
   background: linear-gradient(to bottom, rgb(#000, 10%), transparent);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   isolation: isolate;
   z-index: 10;
 }

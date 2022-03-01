@@ -4,6 +4,7 @@ import NavBar from "./components/medium/NavBar.vue";
 import { useUserStore } from "./stores/user";
 import ReloadPrompt from "./components/small/ReloadPrompt.vue";
 import { defineAsyncComponent } from "vue";
+
 const shouldReload =
   typeof window !== "undefined"
     ? defineAsyncComponent(() => import("@/components/small/ReloadPrompt.vue"))
@@ -11,6 +12,8 @@ const shouldReload =
 
 const user = useUserStore();
 user.setUser();
+
+const year = new Date().getFullYear();
 </script>
 
 <template>
@@ -20,6 +23,11 @@ user.setUser();
   <div class="main-view">
     <RouterView />
   </div>
+  <footer class="footer">
+    Created by Dev24 with love
+    <span class="footer-emoji">🧡</span>
+    {{ year }}
+  </footer>
   <ReloadPrompt v-if="shouldReload" />
 </template>
 
@@ -32,13 +40,12 @@ user.setUser();
   margin-left: auto;
   margin-right: auto;
   font-weight: normal;
-  padding: 1rem;
-
-  @media screen and (min-width: 800px) {
-    padding: 2rem;
-  }
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
+</style>
 
+<style lang="scss" scoped>
 .background {
   z-index: -1;
   position: fixed;
@@ -48,10 +55,22 @@ user.setUser();
   width: 100vw;
   background: var(--color-background);
 }
-</style>
 
-<style lang="scss" scoped>
 .main-view {
   margin-top: 5rem;
+}
+
+.footer {
+  font-size: 1rem;
+  margin-top: 10rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgb(#000, 20%);
+}
+
+.footer-emoji {
+  font-size: 1rem;
+  margin-right: 4px;
 }
 </style>
