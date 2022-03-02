@@ -11,7 +11,10 @@ const shouldReload =
     : null;
 
 const user = useUserStore();
-user.setUser();
+
+if (window?.CookieFirst?.consent.functional) {
+  user.setUser();
+}
 
 const year = new Date().getFullYear();
 </script>
