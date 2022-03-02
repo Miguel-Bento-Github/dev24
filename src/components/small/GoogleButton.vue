@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { firebaseProvider } from "@/config/firebase/firebaseProvider";
-import { firebaseService } from "@/config/firebase/firebaseService";
+import { firebaseProvider } from "@/firebase/firebaseProvider";
+import { firebaseService } from "@/firebase/firebaseService";
 
 const login = <K extends keyof typeof firebaseProvider>(providerKey: K) => {
   firebaseService.login(firebaseProvider[providerKey], providerKey);

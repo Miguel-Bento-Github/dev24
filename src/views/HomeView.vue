@@ -8,9 +8,11 @@ import CSSDoodle from "@/components/small/CSSDoodle.vue";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
 import content from "@/locales/en.json";
 import { useUserStore } from "@/stores/user";
+import { computed } from "vue";
 
 useEntrance();
 const { isMatch } = useScreenQuery("(min-width: 550px)");
+const hasConsent = computed(() => window?.CookieFirst?.consent.functional);
 const user = useUserStore();
 </script>
 
@@ -48,7 +50,7 @@ const user = useUserStore();
     </DevicesWrapper>
   </article>
 
-  <SignIn />
+  <SignIn v-if="hasConsent" />
 </template>
 
 <style lang="scss" scoped>

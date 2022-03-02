@@ -42,6 +42,7 @@ window.onunload = () => sessionStorage.removeItem("wasPrivacyOpen");
 <style lang="scss" scoped>
 .privacy-view {
   font-size: 1rem;
+  padding: 1rem;
 }
 .cookies {
   background: var(--white);

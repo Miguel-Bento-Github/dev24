@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 
 export const useElementObserver = () => {
-  const isIntersecting = ref(false);
+  const ratio = ref(0);
   const elementRef = ref<HTMLElement>(document.createElement("div"));
 
   const options = {
@@ -12,9 +12,7 @@ export const useElementObserver = () => {
 
   const elementObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio > 0.75) {
-        isIntersecting.value = true;
-      }
+      ratio.value = entry.intersectionRatio;
     });
   }, options);
 
@@ -30,5 +28,5 @@ export const useElementObserver = () => {
     }
   });
 
-  return { isIntersecting, elementRef };
+  return { ratio, elementRef };
 };

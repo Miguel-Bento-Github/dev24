@@ -1,4 +1,4 @@
-import { getUserState } from "@/config/firebase/getUser";
+import { getUserState } from "@/firebase/getUser";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {

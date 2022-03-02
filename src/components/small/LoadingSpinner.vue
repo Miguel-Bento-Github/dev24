@@ -1,4 +1,5 @@
 <template lang="pug">
+
 - lines = 10
 
 mixin line(n)
@@ -23,6 +24,10 @@ mixin line(n)
   border-radius: 50%;
   animation: rotate 7s cubic-bezier(0.1, 1.19, 0.75, -0.13) infinite
     alternate-reverse;
+
+  @media (prefers-reduced-motion) {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes rotate {

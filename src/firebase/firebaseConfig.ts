@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
+import { Analytics, getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { Auth, getAuth } from "firebase/auth";
+import { analytics, firebaseAuth } from "./../config/firebase/firebaseConfig";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDo2CcrkuCtSni8Hm3U7nppw5ilkJUH804",
@@ -13,7 +14,11 @@ export const firebaseConfig = {
   measurementId: "G-5DLZ16L48H", // For v >=v7.20.0 measurementId is optional
 };
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(firebaseApp);
-export const firebaseAuth = getAuth();
+let analytics: Analytics, firebaseAuth: Auth;
+if (window?.CookieFirst?.consent.functional) {
+  const firebaseApp = initializeApp(firebaseConfig);
+  analytics = getAnalytics(firebaseApp);
+  firebaseAuth = getAuth();
+}
+
+export { analytics, firebaseAuth };

@@ -1,4 +1,4 @@
-import { firebaseAuth } from "@/config/firebase/firebaseConfig";
+import { firebaseAuth } from "@/firebase/firebaseConfig";
 import { User } from "firebase/auth";
 
 export const getUserState = (): Promise<User> => {

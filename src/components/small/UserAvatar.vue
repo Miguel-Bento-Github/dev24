@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { firebaseService } from "@/config/firebase/firebaseService";
+import { firebaseService } from "@/firebase/firebaseService";
 import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
 
