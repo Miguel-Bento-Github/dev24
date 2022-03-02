@@ -7,7 +7,11 @@ export const useMonkeyAnimation = () => {
     const frames: HTMLElement[] = gsap.utils.toArray(".monkey-wrapper");
     const texts: HTMLElement[] = gsap.utils.toArray(".monkey-header");
     const { isMatch } = useScreenQuery("(min-width: 550px)");
+    const { isMatch: prefersReduced } = useScreenQuery(
+      "(prefers-reduced-motion)"
+    );
 
+    if (prefersReduced) return;
     // create some space between the frames and the footer
     gsap.set(frames[frames.length - 1].parentElement, { marginBottom: "15vh" });
 
@@ -23,7 +27,7 @@ export const useMonkeyAnimation = () => {
         });
 
         timeline.from(ref.parentElement, {
-          y: "150px",
+          y: isMatch ? "0" : "150px",
         });
         return;
       }
