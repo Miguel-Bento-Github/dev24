@@ -82,19 +82,6 @@ watch(isIntersecting, (newValue: boolean) => {
       justify-items: flex-end;
     }
   }
-
-  &::before {
-    z-index: -1;
-    @include pseudo;
-    left: -100vw;
-    height: 100%;
-    width: 200vw;
-    background: linear-gradient(
-      transparent 0%,
-      rgb(#000, 10%) 50%,
-      transparent 100%
-    );
-  }
 }
 
 .monkey-wrapper {

@@ -25,7 +25,7 @@ import IconTablet from "@/components/icons/IconTablet.vue";
 
 <style lang="scss" scoped>
 .device-section {
-  margin-top: 50vh;
+  margin-top: 15vh;
 }
 
 .devices {

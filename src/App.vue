@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from "vue";
 import { RouterView } from "vue-router";
 import NavBar from "./components/medium/NavBar.vue";
-import { useUserStore } from "./stores/user";
 import ReloadPrompt from "./components/small/ReloadPrompt.vue";
-import { defineAsyncComponent } from "vue";
+import { useUserStore } from "./stores/user";
 
 const shouldReload =
   typeof window !== "undefined"

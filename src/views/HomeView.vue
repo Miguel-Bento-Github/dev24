@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import SignIn from "@/components/medium/SignIn.vue";
 import { useEntrance } from "@/animation/useEntranceAnimation";
-import { useUserStore } from "@/stores/user";
-import content from "@/locales/en.json";
 import IconHand from "@/components/icons/IconHand.vue";
-import CSSDoodle from "@/components/small/CSSDoodle.vue";
-import ContactButton from "@/components/small/ContactButton.vue";
-
 import DevicesWrapper from "@/components/medium/DevicesWrapper.vue";
+import SignIn from "@/components/medium/SignIn.vue";
+import ContactButton from "@/components/small/ContactButton.vue";
+import CSSDoodle from "@/components/small/CSSDoodle.vue";
+import { useScreenQuery } from "@/hooks/useScreenQuery";
+import content from "@/locales/en.json";
+import { useUserStore } from "@/stores/user";
 
 useEntrance();
-
+const { isMatch } = useScreenQuery("(min-width: 550px)");
 const user = useUserStore();
 </script>
 
@@ -31,7 +31,7 @@ const user = useUserStore();
         </p>
         <ContactButton />
       </header>
-      <div class="doodle-wrapper">
+      <div v-if="isMatch" class="doodle-wrapper">
         <CSSDoodle />
       </div>
     </section>
