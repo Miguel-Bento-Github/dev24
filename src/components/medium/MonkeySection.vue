@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useElementObserver } from "@/hooks/useElementObserver";
+import { useScreenQuery } from "@/hooks/useScreenQuery";
 import { ref, watch } from "vue";
 import LoadingSpinner from "../small/LoadingSpinner.vue";
 
@@ -10,16 +11,22 @@ const props = defineProps<{
   i: number;
 }>();
 
-const src = ref(!props.i ? props.link : "");
-const { elementRef, isIntersecting } = useElementObserver();
-const isLoading = ref(true);
-watch(isIntersecting, (newValue: boolean) => {
-  if (newValue) src.value = props.link;
+const { isMatch } = useScreenQuery("(min-width: 550px)");
 
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 500);
-});
+const src = ref(!props.i || !isMatch.value ? props.link : "");
+
+const { elementRef, ratio } = useElementObserver();
+const isLoading = ref(true);
+
+if (isMatch.value) {
+  watch(ratio, (newValue: number) => {
+    if (newValue > 0.01) src.value = props.link;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+  });
+}
 </script>
 
 <template>
@@ -27,9 +34,17 @@ watch(isIntersecting, (newValue: boolean) => {
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
-        <iframe v-if="src" loading="lazy" frameborder="0" :src="src"></iframe>
+        <iframe
+          v-if="src"
+          loading="lazy"
+          scrolling="no"
+          frameborder="0"
+          :src="src"
+        ></iframe>
         <LoadingSpinner
-          v-if="isLoading"
+          role="presentation"
+          aria-label="loading spinner"
+          v-if="isLoading || !link"
           :class="{ disappear: src }"
           class="loading"
         />
@@ -60,6 +75,10 @@ watch(isIntersecting, (newValue: boolean) => {
     rgb(#000, 20%) 50%,
     transparent 100%
   );
+
+  &:first-child {
+    padding-top: 10vh;
+  }
 
   @media screen and (min-width: 800px) {
     padding: 15vh 2rem;
