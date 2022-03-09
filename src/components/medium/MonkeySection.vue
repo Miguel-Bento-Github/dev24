@@ -13,24 +13,22 @@ const props = defineProps<{
 
 const { isMatch } = useScreenQuery("(min-width: 550px)");
 
-const src = ref(!props.i || !isMatch.value ? props.link : "");
+const src = ref(!isMatch.value || !props.i ? props.link : "");
 
 const { elementRef, ratio } = useElementObserver();
 const isLoading = ref(true);
 
-if (isMatch.value) {
-  watch(ratio, (newValue: number) => {
-    if (newValue > 0.01) src.value = props.link;
+watch(ratio, (newValue: number) => {
+  if (newValue > 0.01) src.value = props.link;
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 500);
-  });
-}
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 500);
+});
 </script>
 
 <template>
-  <section ref="elementRef" class="monkey">
+  <section :id="caption" ref="elementRef" class="monkey">
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
@@ -39,12 +37,12 @@ if (isMatch.value) {
           loading="lazy"
           scrolling="no"
           frameborder="0"
-          :src="src"
+          :src="isMatch ? src : link"
         ></iframe>
         <LoadingSpinner
           role="presentation"
           aria-label="loading spinner"
-          v-if="isLoading || !link"
+          v-if="isLoading || !src"
           :class="{ disappear: src }"
           class="loading"
         />
