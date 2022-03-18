@@ -136,7 +136,7 @@ watch(ratio, (newValue: number) => {
   aspect-ratio: 10 / 16;
 
   @media screen and (min-width: 450px) {
-    width: auto;
+    width: 100%;
     height: 35vh;
     aspect-ratio: 4 / 3;
   }
