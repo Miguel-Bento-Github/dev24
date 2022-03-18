@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import { defineAsyncComponent, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import NavBar from "./components/medium/NavBar.vue";
-import ReloadPrompt from "./components/small/ReloadPrompt.vue";
+import { useBuyMeACoffee } from "./hooks/useBuyMeACoffee";
 import { useUserStore } from "./stores/user";
-
-const shouldReload =
-  typeof window !== "undefined"
-    ? defineAsyncComponent(() => import("@/components/small/ReloadPrompt.vue"))
-    : null;
 
 const user = useUserStore();
 
@@ -17,28 +11,7 @@ if (window?.CookieFirst?.consent.functional) {
 }
 
 const year = new Date().getFullYear();
-
-const addBuyMeCoffeeKeyboardShortcut = () => {
-  setTimeout(() => {
-    const coffeeBtn = document.getElementById("bmc-wbtn");
-    const frame = document.querySelector("[title='Buy Me a Coffee']");
-    frame?.parentElement?.setAttribute("aria-hidden", "true");
-    console.log(frame?.parentElement);
-
-    if (!coffeeBtn || !coffeeBtn.firstChild) return;
-
-    coffeeBtn.setAttribute("aria-label", "Buy me a coffee button");
-    coffeeBtn.setAttribute("role", "button");
-    coffeeBtn.setAttribute("tabIndex", "0");
-    coffeeBtn.classList.add("buy-coffee");
-
-    coffeeBtn.addEventListener("keyup", ({ code }) => {
-      if (code === "Space") coffeeBtn.click();
-    });
-  }, 50);
-};
-
-onMounted(() => addBuyMeCoffeeKeyboardShortcut());
+useBuyMeACoffee();
 </script>
 
 <template>
@@ -53,7 +26,6 @@ onMounted(() => addBuyMeCoffeeKeyboardShortcut());
     <span class="footer-emoji">🧡</span>
     {{ year }}
   </footer>
-  <ReloadPrompt v-if="shouldReload" />
 </template>
 
 <style lang="scss">

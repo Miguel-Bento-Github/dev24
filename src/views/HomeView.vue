@@ -64,8 +64,8 @@ const user = useUserStore();
 
   @media screen and (min-width: 800px) {
     grid-template-columns: 1fr 1fr;
-    margin-top: 15rem;
-    margin-bottom: 15rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
 
   .doodle-wrapper {
