@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useEntrance } from "@/animation/useEntranceAnimation";
 import IconHand from "@/components/icons/IconHand.vue";
-import DevicesWrapper from "@/components/medium/DevicesWrapper.vue";
 import SignIn from "@/components/medium/SignIn.vue";
 import ContactButton from "@/components/small/ContactButton.vue";
 import CSSDoodle from "@/components/small/CSSDoodle.vue";
@@ -17,11 +16,16 @@ const user = useUserStore();
 </script>
 
 <template>
-  <article ref="elementRef" class="content">
-    <section itemscope itemtype="https://schema.org/Service" class="hero">
+  <article aria-label="Hero" ref="elementRef" class="content">
+    <section
+      aria-labelledby="headline"
+      itemscope
+      itemtype="https://schema.org/Service"
+      class="hero"
+    >
       <meta itemprop="serviceType" content="Website development" />
       <header class="app-header">
-        <h1 class="h2 headline">
+        <h1 id="headline" class="h2 headline">
           {{ content.welcome }}
           <Transition name="fade" mode="out-in">
             <span v-if="user.name">{{ user.name }}</span>
@@ -33,21 +37,10 @@ const user = useUserStore();
         </p>
         <ContactButton />
       </header>
-      <div v-if="isMatch" class="doodle-wrapper">
+      <div v-if="isMatch" aria-hidden="true" class="doodle-wrapper">
         <CSSDoodle />
       </div>
     </section>
-    <section>
-      <h3 class="hidden">Browser support</h3>
-    </section>
-    <DevicesWrapper>
-      <template #support>
-        {{ content.browserSupport }}
-      </template>
-      <template #content>
-        {{ content.devices }}
-      </template>
-    </DevicesWrapper>
   </article>
 
   <SignIn v-if="hasConsent" />

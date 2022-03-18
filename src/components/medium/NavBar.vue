@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
+import IconMenu from "@/components/icons/IconMenu.vue";
 import router from "@/router";
 import { computed, ref, watchEffect } from "vue";
-import IconMenu from "@/components/icons/IconMenu.vue";
 
 const isSmallScreen = computed(
   () => window.matchMedia("(max-width: 800px)").matches
@@ -24,7 +24,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <header @focusout="closeMenu" class="wrapper">
+  <header title="navigation bar" @focusout="closeMenu" class="wrapper">
     <IconLogo />
     <button
       class="dots"
@@ -36,7 +36,7 @@ const closeMenu = () => {
     </button>
 
     <transition name="fade">
-      <nav class="nav" v-if="isMenuOpen">
+      <nav aria-label="Page links" class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Home</RouterLink>
         <RouterLink class="router-link" to="/work">Work</RouterLink>
         <RouterLink class="router-link" to="/privacy-policy">
@@ -64,6 +64,10 @@ const closeMenu = () => {
   -webkit-backdrop-filter: blur(3px);
   isolation: isolate;
   z-index: 10;
+
+  @supports not (backdrop-filter: blur(3px)) {
+    background: linear-gradient(to bottom, rgb(#000, 80%), rgb(#000, 50%));
+  }
 }
 
 .dots {

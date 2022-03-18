@@ -7,27 +7,32 @@
     {
       "header": "Through Dev24, we offer specialized web development skills to create beautiful and user-friendly websites for you. If you need a digital card, we can provide your own customized card.",
       "link": "https://www.mr-monkey.net/",
-      "caption": "mr-monkey.net"
+      "caption": "mr-monkey.net",
+      "meta": "Portfolio of Bento, a Developer"
     },
     {
       "header": "By keeping up with the latest technologies, we're able to offer special and unique content",
       "link": "https://mix-blend-mode.netlify.app/",
-      "caption": "mix-blend-mode"
+      "caption": "mix-blend-mode",
+      "meta": "This page contains a UI technique that allows color blending"
     },
     {
       "header": "Claymorphic styles might be the new trend, your website can use these cool elements.",
       "link": "https://miguel-bento-github.github.io/claymorphic/",
-      "caption": "claymorphic"
+      "caption": "claymorphic",
+      "meta": "Page with Claymorphic animations"
     },
     {
       "header": "A photo gallery to show off all of your fantastic content can bring more customized experiences.",
       "link": "https://miguel-bento-github.github.io/photo-gallery/",
-      "caption": "photo-gallery"
+      "caption": "photo-gallery",
+      "meta": "A photo gallery with a special design"
     },
     {
       "header": "After skeuomorphic design, neumorphism is one of the latest trends in design, is this your next look?",
       "link": "https://miguel-bento-github.github.io/neumorphism/",
-      "caption": "neumorphism"
+      "caption": "neumorphism",
+      "meta": "Experimental page with Neumorphism"
     }
   ]
 }

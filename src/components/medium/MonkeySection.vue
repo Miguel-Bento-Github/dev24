@@ -8,6 +8,7 @@ const props = defineProps<{
   header: string;
   link: string;
   caption: string;
+  meta: string;
   i: number;
 }>();
 
@@ -28,11 +29,17 @@ watch(ratio, (newValue: number) => {
 </script>
 
 <template>
-  <section :id="caption" ref="elementRef" class="monkey">
+  <section
+    :aria-labelledby="`${caption}-${i}`"
+    :id="caption"
+    ref="elementRef"
+    class="monkey"
+  >
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
         <iframe
+          :title="meta"
           v-if="src"
           loading="lazy"
           scrolling="no"
@@ -48,7 +55,13 @@ watch(ratio, (newValue: number) => {
         />
       </div>
     </div>
-    <a class="monkey-link" target="_blank" rel="noopener" :href="link">
+    <a
+      :id="`${caption}-${i}`"
+      class="monkey-link"
+      target="_blank"
+      rel="noopener"
+      :href="link"
+    >
       {{ caption }}
     </a>
   </section>

@@ -9,10 +9,11 @@ useMonkeyAnimation();
 <template>
   <MonkeySection
     ref="elementRef"
-    v-for="({ header, link, caption }, index) in content.sections"
+    v-for="({ header, link, caption, meta }, index) in content.sections"
     :header="header"
     :link="link"
     :caption="caption"
+    :meta="meta"
     :key="caption"
     :i="index"
   />

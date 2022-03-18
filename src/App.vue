@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import NavBar from "./components/medium/NavBar.vue";
 import ReloadPrompt from "./components/small/ReloadPrompt.vue";
@@ -17,16 +17,38 @@ if (window?.CookieFirst?.consent.functional) {
 }
 
 const year = new Date().getFullYear();
+
+const addBuyMeCoffeeKeyboardShortcut = () => {
+  setTimeout(() => {
+    const coffeeBtn = document.getElementById("bmc-wbtn");
+    const frame = document.querySelector("[title='Buy Me a Coffee']");
+    frame?.parentElement?.setAttribute("aria-hidden", "true");
+    console.log(frame?.parentElement);
+
+    if (!coffeeBtn || !coffeeBtn.firstChild) return;
+
+    coffeeBtn.setAttribute("aria-label", "Buy me a coffee button");
+    coffeeBtn.setAttribute("role", "button");
+    coffeeBtn.setAttribute("tabIndex", "0");
+    coffeeBtn.classList.add("buy-coffee");
+
+    coffeeBtn.addEventListener("keyup", ({ code }) => {
+      if (code === "Space") coffeeBtn.click();
+    });
+  }, 50);
+};
+
+onMounted(() => addBuyMeCoffeeKeyboardShortcut());
 </script>
 
 <template>
-  <div role="img" class="background"></div>
+  <div role="img" aria-hidden="true" class="background"></div>
   <NavBar />
 
-  <div class="main-view">
+  <main title="main" class="main-view">
     <RouterView />
-  </div>
-  <footer class="footer">
+  </main>
+  <footer aria-label="footer" class="footer">
     Created by Dev24 with love
     <span class="footer-emoji">🧡</span>
     {{ year }}
@@ -44,7 +66,7 @@ const year = new Date().getFullYear();
   margin-right: auto;
   font-weight: normal;
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 5rem;
 }
 </style>
 
