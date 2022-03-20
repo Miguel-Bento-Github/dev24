@@ -84,14 +84,18 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
-  background: linear-gradient(to bottom, rgb(#000, 10%), transparent);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
   isolation: isolate;
   z-index: 10;
+  background: linear-gradient(to bottom, rgb(#000, 80%), rgb(#000, 50%));
 
-  @supports not (backdrop-filter: blur(3px)) {
-    background: linear-gradient(to bottom, rgb(#000, 80%), rgb(#000, 50%));
+  @supports (backdrop-filter: blur(3px)) {
+    background: linear-gradient(to bottom, rgb(#000, 10%), transparent);
+    backdrop-filter: blur(3px);
+  }
+
+  @supports (-webkit-backdrop-filter: blur(3px)) {
+    background: linear-gradient(to bottom, rgb(#000, 10%), transparent);
+    -webkit-backdrop-filter: blur(3px);
   }
 }
 
