@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useEntrance } from "@/animation/useEntranceAnimation";
-import IconHand from "@/components/icons/IconHand.vue";
 import SignIn from "@/components/medium/SignIn.vue";
 import ContactButton from "@/components/small/ContactButton.vue";
 import CSSDoodle from "@/components/small/CSSDoodle.vue";
@@ -8,6 +7,7 @@ import { useScreenQuery } from "@/hooks/useScreenQuery";
 import content from "@/locales/en.json";
 import { useUserStore } from "@/stores/user";
 import { computed } from "vue";
+import IconWelcome from "@/components/icons/IconWelcome.vue";
 
 useEntrance();
 const { isMatch } = useScreenQuery("(min-width: 550px)");
@@ -26,10 +26,9 @@ const user = useUserStore();
       <meta itemprop="serviceType" content="Website development" />
       <header class="app-header">
         <h1 id="headline" class="h2 headline">
-          {{ content.welcome }}
+          <IconWelcome :aria-label="content.welcome" />
           <Transition name="fade" mode="out-in">
             <span v-if="user.name">{{ user.name }}</span>
-            <IconHand v-else />
           </Transition>
         </h1>
         <p class="description">
@@ -56,6 +55,12 @@ const user = useUserStore();
 }
 .app-header {
   margin-bottom: 4rem;
+}
+
+.headline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5rem;
 }
 
 .hero {
