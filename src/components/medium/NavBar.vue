@@ -2,13 +2,14 @@
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconMenu from "@/components/icons/IconMenu.vue";
 import router from "@/router";
-import { computed, ref, watchEffect } from "vue";
+import { computed, onUnmounted, ref, watch, watchEffect } from "vue";
 
 const isSmallScreen = computed(
   () => window.matchMedia("(max-width: 800px)").matches
 );
 
 const isMenuOpen = ref(!isSmallScreen.value);
+const navigation = ref<HTMLElement | null>(null);
 
 if (isSmallScreen.value) {
   watchEffect(() => {
@@ -21,10 +22,34 @@ if (isSmallScreen.value) {
 const closeMenu = () => {
   if (isSmallScreen.value) isMenuOpen.value = false;
 };
+
+const checkForEscape = ({ code }: KeyboardEvent) => {
+  if (code === "Escape") closeMenu();
+};
+
+const checkForClickOutside = (e: MouseEvent) => {
+  if (!navigation.value || !e.target) return;
+
+  isMenuOpen.value = navigation.value.contains(e.target as Node);
+};
+
+watch(isMenuOpen, (newValue) => {
+  if (newValue) {
+    window.addEventListener("click", checkForClickOutside);
+    window.addEventListener("keyup", checkForEscape);
+  } else {
+    window.removeEventListener("keyup", checkForEscape);
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keyup", checkForEscape);
+  window.removeEventListener("click", checkForClickOutside);
+});
 </script>
 
 <template>
-  <header title="navigation bar" @focusout="closeMenu" class="wrapper">
+  <header ref="navigation" title="navigation header" class="wrapper">
     <IconLogo />
     <button
       class="dots"
