@@ -10,18 +10,19 @@ const isSmallScreen = computed(
 
 const isMenuOpen = ref(!isSmallScreen.value);
 const navigation = ref<HTMLElement | null>(null);
-
-if (isSmallScreen.value) {
-  watchEffect(() => {
-    router.beforeEach(() => {
-      isMenuOpen.value = false;
-    });
-  });
-}
+const toggle = ref<HTMLElement | null>(null);
 
 const closeMenu = () => {
   if (isSmallScreen.value) isMenuOpen.value = false;
 };
+
+if (isSmallScreen.value) {
+  watchEffect(() => {
+    router.beforeEach(() => {
+      closeMenu();
+    });
+  });
+}
 
 const checkForEscape = ({ code }: KeyboardEvent) => {
   if (code === "Escape") closeMenu();
@@ -29,8 +30,9 @@ const checkForEscape = ({ code }: KeyboardEvent) => {
 
 const checkForClickOutside = (e: MouseEvent) => {
   if (!navigation.value || !e.target) return;
-
-  isMenuOpen.value = navigation.value.contains(e.target as Node);
+  if (!navigation.value.contains(e.target as Node)) {
+    closeMenu();
+  }
 };
 
 watch(isMenuOpen, (newValue) => {
@@ -38,6 +40,7 @@ watch(isMenuOpen, (newValue) => {
     window.addEventListener("click", checkForClickOutside);
     window.addEventListener("keyup", checkForEscape);
   } else {
+    window.removeEventListener("click", checkForClickOutside);
     window.removeEventListener("keyup", checkForEscape);
   }
 });
@@ -52,6 +55,8 @@ onUnmounted(() => {
   <header ref="navigation" title="navigation header" class="wrapper">
     <IconLogo />
     <button
+      aria-label="toggle navigation menu"
+      ref="toggle"
       class="dots"
       type="button"
       v-if="isSmallScreen"
