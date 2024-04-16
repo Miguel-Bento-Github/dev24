@@ -16,15 +16,15 @@ const { isMatch } = useScreenQuery("(min-width: 550px)");
 
 const src = ref(!isMatch.value || !props.i ? props.link : "");
 
-const { elementRef, ratio } = useElementObserver();
+const { elementRef, ratio } = useElementObserver(0.5);
 const isLoading = ref(true);
 
 watch(ratio, (newValue: number) => {
-  if (newValue > 0.01) src.value = props.link;
+  if (newValue > 0) src.value = props.link;
 
   setTimeout(() => {
     isLoading.value = false;
-  }, 500);
+  }, 250);
 });
 </script>
 
@@ -64,11 +64,13 @@ watch(ratio, (newValue: number) => {
     >
       {{ caption }}
     </a>
+    <div class="load-trigger"></div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 @use "@/scss/pseudo.scss" as *;
+
 .monkey {
   position: relative;
   display: grid;

@@ -1,13 +1,13 @@
 import { onMounted, onUnmounted, ref } from "vue";
 
-export const useElementObserver = () => {
+export const useElementObserver = (threshold = 0) => {
   const ratio = ref(0);
   const elementRef = ref<HTMLElement>(document.createElement("div"));
 
   const options = {
     root: document.getElementById("#app"),
-    rootMargin: "0px",
-    threshold: 1.0,
+    rootMargin: "0%",
+    threshold,
   };
 
   const elementObserver = new IntersectionObserver((entries) => {
