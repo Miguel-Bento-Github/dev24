@@ -6,7 +6,7 @@ export const useElementObserver = (threshold = 0) => {
 
   const options = {
     root: document.getElementById("#app"),
-    rootMargin: "0%",
+    rootMargin: "25%",
     threshold,
   };
 

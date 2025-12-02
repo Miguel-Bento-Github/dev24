@@ -10,13 +10,14 @@ const props = defineProps<{
   caption: string;
   meta: string;
   i: number;
+  image?: string;
 }>();
 
 const { isMatch } = useScreenQuery("(min-width: 550px)");
 
 const src = ref(!isMatch.value || !props.i ? props.link : "");
 
-const { elementRef, ratio } = useElementObserver(0.5);
+const { elementRef, ratio } = useElementObserver(0.1);
 const isLoading = ref(true);
 
 watch(ratio, (newValue: number) => {
@@ -38,21 +39,30 @@ watch(ratio, (newValue: number) => {
     <p class="monkey-header">{{ header }}</p>
     <div class="monkey-wrapper">
       <div class="monkey-iframe-container">
-        <iframe
-          :title="meta"
-          v-if="src"
+        <img
+          v-if="image"
+          :src="image"
+          :alt="meta"
+          class="monkey-image"
           loading="lazy"
-          scrolling="no"
-          frameborder="0"
-          :src="isMatch ? src : link"
-        ></iframe>
-        <LoadingSpinner
-          role="presentation"
-          aria-label="loading spinner"
-          v-if="isLoading || !src"
-          :class="{ disappear: src }"
-          class="loading"
         />
+        <template v-else>
+          <iframe
+            :title="meta"
+            v-if="src"
+            loading="lazy"
+            scrolling="no"
+            frameborder="0"
+            :src="isMatch ? src : link"
+          ></iframe>
+          <LoadingSpinner
+            role="presentation"
+            aria-label="loading spinner"
+            v-if="isLoading || !src"
+            :class="{ disappear: src }"
+            class="loading"
+          />
+        </template>
       </div>
     </div>
     <a
@@ -163,7 +173,8 @@ watch(ratio, (newValue: number) => {
   }
 }
 
-.monkey iframe {
+.monkey iframe,
+.monkey-image {
   position: absolute;
   top: 0;
   left: 0;
@@ -171,6 +182,7 @@ watch(ratio, (newValue: number) => {
   width: 100%;
   border-radius: 24px;
   transition: all 0.15s ease-in-out;
+  object-fit: contain;
 }
 
 .loading {

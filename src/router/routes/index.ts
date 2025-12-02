@@ -1,24 +1,10 @@
 export const routes = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("@/views/HomeView.vue"),
-    meta: {
-      title: "Dev24",
-      metaTags: [
-        {
-          name: "description",
-          content: "The home page in our app.",
-        },
-      ],
-    },
-  },
-  {
-    path: "/work",
     name: "Work",
     component: () => import("@/views/WorkView.vue"),
     meta: {
-      title: "Work",
+      title: "Dev24",
       metaTags: [
         {
           name: "description",
