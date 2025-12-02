@@ -24,34 +24,43 @@ const isLoading = ref(true);
 const isExpanded = ref(false);
 const wrapperRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
-const headerRef = ref<HTMLElement | null>(null);
 
 const toggleExpand = () => {
   isExpanded.value = !isExpanded.value;
 
   if (isExpanded.value) {
-    gsap.to(containerRef.value, {
+    const tl = gsap.timeline();
+    tl.to(wrapperRef.value, {
+      maxWidth: "1400px",
+      width: "100%",
+      duration: 0.4,
+      ease: "power2.out",
+    }, 0);
+    tl.to(containerRef.value, {
       width: "100%",
       height: "70vh",
       duration: 0.4,
       ease: "power2.out",
-    });
-    gsap.to(headerRef.value, {
-      opacity: 0,
-      duration: 0.2,
-    });
+    }, 0);
   } else {
-    gsap.to(containerRef.value, {
-      width: "",
-      height: "",
-      duration: 0.4,
-      ease: "power2.inOut",
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.set(wrapperRef.value, { clearProps: "maxWidth,width" });
+        gsap.set(containerRef.value, { clearProps: "width,height" });
+      },
     });
-    gsap.to(headerRef.value, {
-      opacity: 1,
-      duration: 0.3,
-      delay: 0.2,
-    });
+    tl.to(wrapperRef.value, {
+      maxWidth: "max-content",
+      width: "100%",
+      duration: 0.25,
+      ease: "power2.in",
+    }, 0);
+    tl.to(containerRef.value, {
+      width: "40vw",
+      height: "auto",
+      duration: 0.25,
+      ease: "power2.in",
+    }, 0);
   }
 };
 
@@ -71,8 +80,8 @@ watch(ratio, (newValue: number) => {
     ref="elementRef"
     class="monkey"
   >
-    <p ref="headerRef" class="monkey-header">{{ header }}</p>
-    <div ref="wrapperRef" class="monkey-wrapper" :class="{ expanded: isExpanded }">
+    <p class="monkey-header">{{ header }}</p>
+    <div ref="wrapperRef" class="monkey-wrapper">
       <button
         v-if="!image"
         class="expand-btn"
@@ -185,10 +194,6 @@ watch(ratio, (newValue: number) => {
     margin: auto 0 2rem;
   }
 
-  &.expanded {
-    max-width: none;
-    grid-column: 1 / -1;
-  }
 }
 
 .expand-btn {
