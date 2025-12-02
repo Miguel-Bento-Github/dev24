@@ -2,7 +2,9 @@
 import { useElementObserver } from "@/hooks/useElementObserver";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
 import { ref, watch } from "vue";
+import { gsap } from "gsap";
 import LoadingSpinner from "../small/LoadingSpinner.vue";
+import IconExpand from "../icons/IconExpand.vue";
 
 const props = defineProps<{
   header: string;
@@ -19,6 +21,39 @@ const src = ref(!isMatch.value || !props.i ? props.link : "");
 
 const { elementRef, ratio } = useElementObserver(0.1);
 const isLoading = ref(true);
+const isExpanded = ref(false);
+const wrapperRef = ref<HTMLElement | null>(null);
+const containerRef = ref<HTMLElement | null>(null);
+const headerRef = ref<HTMLElement | null>(null);
+
+const toggleExpand = () => {
+  isExpanded.value = !isExpanded.value;
+
+  if (isExpanded.value) {
+    gsap.to(containerRef.value, {
+      width: "100%",
+      height: "70vh",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+    gsap.to(headerRef.value, {
+      opacity: 0,
+      duration: 0.2,
+    });
+  } else {
+    gsap.to(containerRef.value, {
+      width: "",
+      height: "",
+      duration: 0.4,
+      ease: "power2.inOut",
+    });
+    gsap.to(headerRef.value, {
+      opacity: 1,
+      duration: 0.3,
+      delay: 0.2,
+    });
+  }
+};
 
 watch(ratio, (newValue: number) => {
   if (newValue > 0) src.value = props.link;
@@ -36,9 +71,17 @@ watch(ratio, (newValue: number) => {
     ref="elementRef"
     class="monkey"
   >
-    <p class="monkey-header">{{ header }}</p>
-    <div class="monkey-wrapper">
-      <div class="monkey-iframe-container">
+    <p ref="headerRef" class="monkey-header">{{ header }}</p>
+    <div ref="wrapperRef" class="monkey-wrapper" :class="{ expanded: isExpanded }">
+      <button
+        v-if="!image"
+        class="expand-btn"
+        @click="toggleExpand"
+        :aria-label="isExpanded ? 'Collapse' : 'Expand'"
+      >
+        <IconExpand :expanded="isExpanded" />
+      </button>
+      <div ref="containerRef" class="monkey-iframe-container">
         <img
           v-if="image"
           :src="image"
@@ -51,7 +94,6 @@ watch(ratio, (newValue: number) => {
             :title="meta"
             v-if="src"
             loading="lazy"
-            scrolling="no"
             frameborder="0"
             :src="isMatch ? src : link"
           ></iframe>
@@ -127,6 +169,7 @@ watch(ratio, (newValue: number) => {
 }
 
 .monkey-wrapper {
+  position: relative;
   grid-area: frame;
   overflow: hidden;
   border-radius: 32px;
@@ -140,6 +183,29 @@ watch(ratio, (newValue: number) => {
 
   @media screen and (min-width: 800px) {
     margin: auto 0 2rem;
+  }
+
+  &.expanded {
+    max-width: none;
+    grid-column: 1 / -1;
+  }
+}
+
+.expand-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  padding: 0.5rem;
+  background: rgb(0 0 0 / 50%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--white);
+  transition: background 0.15s ease-in-out;
+
+  &:hover {
+    background: rgb(0 0 0 / 70%);
   }
 }
 
