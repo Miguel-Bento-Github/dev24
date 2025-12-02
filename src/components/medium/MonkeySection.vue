@@ -24,43 +24,32 @@ const isLoading = ref(true);
 const isExpanded = ref(false);
 const wrapperRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
+const headerRef = ref<HTMLElement | null>(null);
+const sectionRef = ref<HTMLElement | null>(null);
 
 const toggleExpand = () => {
   isExpanded.value = !isExpanded.value;
 
   if (isExpanded.value) {
-    const tl = gsap.timeline();
-    tl.to(wrapperRef.value, {
-      maxWidth: "1400px",
-      width: "100%",
-      duration: 0.4,
-      ease: "power2.out",
-    }, 0);
-    tl.to(containerRef.value, {
-      width: "100%",
-      height: "70vh",
-      duration: 0.4,
-      ease: "power2.out",
-    }, 0);
+    gsap.set(headerRef.value, { display: "none" });
+    gsap.set(wrapperRef.value, { gridColumn: "1 / -1", maxWidth: "none", width: "100%" });
+    gsap.set(containerRef.value, { width: "100%", height: "70vh" });
+    gsap.fromTo(
+      wrapperRef.value,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.25, ease: "power1.out" }
+    );
   } else {
-    const tl = gsap.timeline({
+    gsap.to(wrapperRef.value, {
+      opacity: 0,
+      duration: 0.15,
+      ease: "power2.in",
       onComplete: () => {
-        gsap.set(wrapperRef.value, { clearProps: "maxWidth,width" });
+        gsap.set(headerRef.value, { clearProps: "display" });
+        gsap.set(wrapperRef.value, { clearProps: "gridColumn,maxWidth,width,opacity" });
         gsap.set(containerRef.value, { clearProps: "width,height" });
       },
     });
-    tl.to(wrapperRef.value, {
-      maxWidth: "max-content",
-      width: "100%",
-      duration: 0.25,
-      ease: "power2.in",
-    }, 0);
-    tl.to(containerRef.value, {
-      width: "40vw",
-      height: "auto",
-      duration: 0.25,
-      ease: "power2.in",
-    }, 0);
   }
 };
 
@@ -80,7 +69,7 @@ watch(ratio, (newValue: number) => {
     ref="elementRef"
     class="monkey"
   >
-    <p class="monkey-header">{{ header }}</p>
+    <p ref="headerRef" class="monkey-header">{{ header }}</p>
     <div ref="wrapperRef" class="monkey-wrapper">
       <button
         v-if="!image"
