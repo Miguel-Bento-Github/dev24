@@ -68,6 +68,7 @@ onUnmounted(() => {
     <transition name="fade">
       <nav aria-label="Page links" class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Work</RouterLink>
+        <a class="router-link" href="mailto:dev.24.contact@gmail.com">Contact</a>
         <RouterLink class="router-link" to="/privacy-policy">
           Privacy Policy
         </RouterLink>
