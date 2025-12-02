@@ -17,5 +17,6 @@ useMonkeyAnimation();
     :image="image"
     :key="caption"
     :i="index"
+    :total="content.sections.length"
   />
 </template>

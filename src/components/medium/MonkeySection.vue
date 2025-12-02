@@ -12,8 +12,21 @@ const props = defineProps<{
   caption: string;
   meta: string;
   i: number;
+  total: number;
   image?: string;
 }>();
+
+const isFirst = props.i === 0;
+const isLast = props.i === props.total - 1;
+
+const scrollToSection = (direction: "up" | "down") => {
+  const sections = document.querySelectorAll(".monkey");
+  const targetIndex = direction === "down" ? props.i + 1 : props.i - 1;
+  const target = sections[targetIndex] as HTMLElement;
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const { isMatch } = useScreenQuery("(min-width: 550px)");
 
@@ -116,6 +129,28 @@ watch(ratio, (newValue: number) => {
     </a>
     <div class="load-trigger"></div>
   </section>
+  <div class="nav-buttons">
+    <button
+      v-if="!isFirst"
+      class="nav-btn"
+      @click="scrollToSection('up')"
+      aria-label="Go to previous section"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
+    <button
+      v-if="!isLast"
+      class="nav-btn"
+      @click="scrollToSection('down')"
+      aria-label="Go to next section"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -254,6 +289,34 @@ watch(ratio, (newValue: number) => {
 
   &.disappear {
     opacity: 0;
+  }
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.nav-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0.5rem;
+  background: rgb(0 0 0 / 30%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--white);
+  transition: background 0.15s ease-in-out;
+
+  &:hover {
+    background: rgb(0 0 0 / 50%);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
