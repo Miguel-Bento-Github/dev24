@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/book"
+  to = "https://cal.com/dev24"
+  status = 301
