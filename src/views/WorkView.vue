@@ -47,12 +47,13 @@ onUnmounted(() => {
   </div>
   <div class="work-group">
     <MonkeySection
-      v-for="({ header, link, caption, meta, logo }, index) in content.clientWork"
+      v-for="({ header, link, caption, meta, logo, screenshot }, index) in content.clientWork"
       :header="header"
       :link="link"
       :caption="caption"
       :meta="meta"
       :logo="logo"
+      :screenshot="screenshot"
       :key="caption"
       :i="index"
       :total="totalSections"
@@ -70,7 +71,8 @@ onUnmounted(() => {
       :link="section.link"
       :caption="section.caption"
       :meta="section.meta"
-      :key="caption"
+      :screenshot="section.screenshot"
+      :key="section.caption"
       :i="content.clientWork.length + index"
       :total="totalSections"
     />

@@ -14,6 +14,7 @@ const props = defineProps<{
   i: number;
   total: number;
   logo?: string;
+  screenshot?: string;
 }>();
 
 const isFirst = props.i === 0;
@@ -85,6 +86,7 @@ watch(ratio, (newValue: number) => {
     <p ref="headerRef" class="monkey-header">{{ header }}</p>
     <div ref="wrapperRef" class="monkey-wrapper">
       <button
+        v-if="!screenshot"
         class="expand-btn"
         @click="toggleExpand"
         :aria-label="isExpanded ? 'Collapse' : 'Expand'"
@@ -92,20 +94,30 @@ watch(ratio, (newValue: number) => {
         <IconExpand :expanded="isExpanded" />
       </button>
       <div ref="containerRef" class="monkey-iframe-container">
-        <iframe
-          :title="meta"
-          v-if="src"
-          loading="lazy"
-          frameborder="0"
-          :src="isMatch ? src : link"
-        ></iframe>
-        <LoadingSpinner
-          role="presentation"
-          aria-label="loading spinner"
-          v-if="isLoading || !src"
-          :class="{ disappear: src }"
-          class="loading"
-        />
+        <a v-if="screenshot" :href="link" target="_blank" rel="noopener" class="monkey-screenshot-link">
+          <img
+            :src="screenshot"
+            :alt="meta"
+            class="monkey-screenshot"
+            loading="lazy"
+          />
+        </a>
+        <template v-else>
+          <iframe
+            :title="meta"
+            v-if="src"
+            loading="lazy"
+            frameborder="0"
+            :src="isMatch ? src : link"
+          ></iframe>
+          <LoadingSpinner
+            role="presentation"
+            aria-label="loading spinner"
+            v-if="isLoading || !src"
+            :class="{ disappear: src }"
+            class="loading"
+          />
+        </template>
       </div>
     </div>
     <a
@@ -276,6 +288,27 @@ watch(ratio, (newValue: number) => {
   width: 100%;
   border-radius: 24px;
   transition: all 0.15s ease-in-out;
+}
+
+.monkey-screenshot-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.monkey-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 .loading {

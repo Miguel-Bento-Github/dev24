@@ -27,14 +27,16 @@
       "link": "https://valepark.org",
       "caption": "valepark.org",
       "meta": "Parking reservation platform for Lisbon",
-      "logo": "https://valepark.org/logo-dark.svg"
+      "logo": "https://valepark.org/logo-dark.svg",
+      "screenshot": "/screenshots/valepark.webp"
     },
     {
       "header": "Interrail's trip planner helps travellers build custom European rail itineraries, combining route planning with real-time scheduling and booking.",
       "link": "https://www.interrail.eu/en/tripplanner",
       "caption": "interrail.eu",
       "meta": "Trip planner for European rail travel",
-      "logo": "https://www.interrail.eu/content/dam/brand-assets/INTER-LOGO-blue-RGB1.svg"
+      "logo": "https://www.interrail.eu/content/dam/brand-assets/INTER-LOGO-blue-RGB1.svg",
+      "screenshot": "/screenshots/eurail.webp"
     }
   ],
   "experiments": [
@@ -54,7 +56,8 @@
       "header": "A photo gallery to show off all of your fantastic content can bring more customized experiences.",
       "link": "https://miguel-bento-github.github.io/photo-gallery/",
       "caption": "photo-gallery",
-      "meta": "A photo gallery with a special design"
+      "meta": "A photo gallery with a special design",
+      "screenshot": "/screenshots/gallery.webp"
     },
     {
       "header": "After skeuomorphic design, neumorphism is one of the latest trends in design, is this your next look?",
