@@ -64,7 +64,9 @@ onUnmounted(() => {
 
 <template>
   <header ref="navigation" title="navigation header" class="wrapper">
-    <IconLogo />
+    <RouterLink to="/" class="logo-link" aria-label="Go to homepage">
+      <IconLogo />
+    </RouterLink>
     <button
       aria-label="toggle navigation menu"
       ref="toggle"
@@ -78,7 +80,7 @@ onUnmounted(() => {
 
     <transition name="fade">
       <nav aria-label="Page links" class="nav" v-if="isMenuOpen">
-        <RouterLink class="router-link" to="/">Work</RouterLink>
+        <RouterLink class="router-link" to="/#client-work">Work</RouterLink>
         <button class="router-link book-link" @click="openBooking">Book</button>
       </nav>
     </transition>
@@ -139,6 +141,11 @@ onUnmounted(() => {
     -webkit-backdrop-filter: blur(3px);
     border-radius: 1rem;
   }
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
 }
 
 .router-link {
