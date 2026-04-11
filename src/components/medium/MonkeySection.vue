@@ -92,22 +92,20 @@ watch(ratio, (newValue: number) => {
         <IconExpand :expanded="isExpanded" />
       </button>
       <div ref="containerRef" class="monkey-iframe-container">
-        <template>
-          <iframe
-            :title="meta"
-            v-if="src"
-            loading="lazy"
-            frameborder="0"
-            :src="isMatch ? src : link"
-          ></iframe>
-          <LoadingSpinner
-            role="presentation"
-            aria-label="loading spinner"
-            v-if="isLoading || !src"
-            :class="{ disappear: src }"
-            class="loading"
-          />
-        </template>
+        <iframe
+          :title="meta"
+          v-if="src"
+          loading="lazy"
+          frameborder="0"
+          :src="isMatch ? src : link"
+        ></iframe>
+        <LoadingSpinner
+          role="presentation"
+          aria-label="loading spinner"
+          v-if="isLoading || !src"
+          :class="{ disappear: src }"
+          class="loading"
+        />
       </div>
     </div>
     <a
