@@ -133,13 +133,14 @@ onUnmounted(() => {
     z-index: 10;
     top: 5rem;
     right: 2rem;
-    display: flex;
-    align-items: flex-end;
     flex-direction: column;
-    background: rgb(#000, 70%);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border-radius: 1rem;
+    align-items: stretch;
+    gap: 0;
+    background: rgb(#000, 80%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
   }
 }
 
@@ -163,6 +164,13 @@ onUnmounted(() => {
   border-left: none;
   border-right: none;
 
+  @media screen and (max-width: 800px) {
+    padding: 0.75rem 1.2rem;
+    border-bottom: none;
+    text-align: center;
+    color: var(--white);
+  }
+
   &:hover {
     color: var(--blue);
     border-bottom-color: currentColor;
@@ -181,6 +189,12 @@ onUnmounted(() => {
   cursor: pointer;
   padding: 0.6rem 1.4rem;
   transition: all 0.2s ease;
+
+  @media screen and (max-width: 800px) {
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
 
   &:hover {
     background: var(--white);

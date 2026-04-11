@@ -165,9 +165,9 @@ watch(ratio, (newValue: number) => {
     "description";
   align-items: flex-start;
   justify-items: center;
-  padding: 30vh 1rem;
+  padding: 8vh 1rem;
   text-align: center;
-  min-height: 50vh;
+  min-height: auto;
   background: linear-gradient(
     transparent 5%,
     rgb(#000, 20%) 50%,
@@ -180,6 +180,7 @@ watch(ratio, (newValue: number) => {
 
   @media screen and (min-width: 800px) {
     padding: 15vh 2rem;
+    min-height: 50vh;
     display: grid;
     align-items: center;
     justify-items: flex-start;
