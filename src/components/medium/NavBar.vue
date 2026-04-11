@@ -2,7 +2,18 @@
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconMenu from "@/components/icons/IconMenu.vue";
 import router from "@/router";
+import { analytics } from "@/firebase/firebaseConfig";
+import { logEvent } from "firebase/analytics";
 import { computed, onUnmounted, ref, watch, watchEffect } from "vue";
+
+const CAL_URL = "https://cal.com/dev24";
+
+const openBooking = () => {
+  if (analytics) {
+    logEvent(analytics, "schedule_click", { location: "navbar" });
+  }
+  window.open(CAL_URL, "_blank", "noopener");
+};
 
 const isSmallScreen = computed(
   () => window.matchMedia("(max-width: 800px)").matches
@@ -68,7 +79,7 @@ onUnmounted(() => {
     <transition name="fade">
       <nav aria-label="Page links" class="nav" v-if="isMenuOpen">
         <RouterLink class="router-link" to="/">Work</RouterLink>
-        <RouterLink class="router-link" to="/#contact">Contact</RouterLink>
+        <button class="router-link book-link" @click="openBooking">Book</button>
       </nav>
     </transition>
   </header>
@@ -111,6 +122,10 @@ onUnmounted(() => {
 }
 
 .nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
   @media screen and (max-width: 800px) {
     position: fixed;
     z-index: 10;
@@ -127,51 +142,42 @@ onUnmounted(() => {
 }
 
 .router-link {
-  position: relative;
-  display: inline-block;
-  padding: 1rem;
-  overflow: hidden;
-
-  @media screen and (max-width: 800px) {
-    color: var(--blue);
-  }
-
-  &:first-child::before {
-    transform: translateX(200%);
-  }
-
-  &::before {
-    @include pseudo;
-    top: 90%;
-    left: 0.5rem;
-    width: calc(100% - 1rem);
-    height: 3px;
-    background: currentColor;
-    border-radius: 0% 100% 10% 10% / 100% 100% 10% 10%;
-    transform: translateX(-200%);
-    transition: transform 0.15s ease-in-out;
-  }
-}
-
-.router-link-exact-active {
-  position: relative;
+  padding: 0.6rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-text);
+  border-bottom: 1px solid currentColor;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 
-  @media screen and (max-width: 800px) {
-    color: var(--white);
-  }
-
-  &:first-child::before {
-    transform: translateX(0%);
-  }
-
-  &::before {
-    transform: translateX(0%);
-    border-radius: 20% 70% 40% 20% / 100% 90% 20% 10%;
+  &:hover {
+    color: var(--blue);
+    border-bottom-color: currentColor;
   }
 }
 
-.router-link-exact-active:hover {
-  background-color: transparent;
+.book-link {
+  background: var(--blue);
+  color: var(--black);
+  border: none;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.6rem 1.4rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--white);
+    transform: translateY(-1px);
+  }
 }
 </style>

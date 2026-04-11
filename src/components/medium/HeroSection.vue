@@ -1,8 +1,19 @@
 <script setup lang="ts">
 import content from "@/locales/en.json";
+import { analytics } from "@/firebase/firebaseConfig";
+import { logEvent } from "firebase/analytics";
 import { gsap } from "gsap";
 import { onMounted, ref } from "vue";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
+
+const CAL_URL = "https://cal.com/dev24";
+
+const openBooking = () => {
+  if (analytics) {
+    logEvent(analytics, "schedule_click", { location: "hero" });
+  }
+  window.open(CAL_URL, "_blank", "noopener");
+};
 
 const heroRef = ref<HTMLElement | null>(null);
 
@@ -78,8 +89,8 @@ onMounted(() => {
         <button class="hero-cta hero-cta--work" @click="scrollTo('#client-work')">
           See the work
         </button>
-        <button class="hero-cta hero-cta--contact" @click="scrollTo('#contact')">
-          Get in touch
+        <button class="hero-cta hero-cta--contact" @click="openBooking">
+          Book a consultation
         </button>
       </div>
     </div>
