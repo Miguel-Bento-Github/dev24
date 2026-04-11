@@ -22,9 +22,8 @@ useBuyMeACoffee();
     <RouterView />
   </main>
   <footer aria-label="footer" class="footer">
-    Created by Dev24 with love
-    <span class="footer-emoji">🧡</span>
-    {{ year }}
+    <span>Created by Dev24 with love <span class="footer-emoji">🧡</span> {{ year }}</span>
+    <RouterLink class="footer-link" to="/privacy-policy">Privacy Policy</RouterLink>
   </footer>
 </template>
 
@@ -64,6 +63,20 @@ useBuyMeACoffee();
   padding: 1rem;
   border-radius: 1rem;
   background: rgb(#000, 20%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-link {
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .footer-emoji {

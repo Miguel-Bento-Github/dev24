@@ -10,7 +10,7 @@ const isActive = ref(false);
     @mouseenter="isDrawing = true"
     @mouseleave="isDrawing = isActive ? true : false"
     @click="isActive = true"
-    href="mailto:bento-miguel@outlook.com&subject=Contact%20from%20website&body=Hi dev24"
+    href="mailto:dev.24.contact@gmail.com?subject=Contact%20from%20website&body=Hi%20dev24"
     type="button"
     class="contact"
   >

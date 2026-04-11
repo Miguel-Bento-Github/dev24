@@ -1,20 +1,24 @@
 {
   "welcome": "Welcome",
-  "hero": "Get the website that fits your needs by creating something special, something unique, something just like you.",
-  "devices": "From your Smartphone to your 8k OLED Screen. Anything is possible with the state of the art animations I provide.",
-  "browserSupport": "I build for Chrome, Firefox, Safari, Edge, and virtually any modern browser",
-  "sections": [
-    {
-      "header": "A photography portfolio showcasing André Branco's work across portraits, film, and travel photography with a responsive masonry gallery.",
-      "link": "https://andrebranco.com/",
-      "caption": "andrebranco.com",
-      "meta": "Photography portfolio for André Branco"
-    },
+  "heroLine1": "We build websites",
+  "heroLine2": "worth remembering.",
+  "heroSub": "Custom digital experiences with craft, clarity, and code that performs. No templates. No shortcuts.",
+  "contact": {
+    "heading": "Let's Work Together",
+    "body": "Have a project in mind? I'd love to hear about it."
+  },
+  "clientWork": [
     {
       "header": "Dream Azul is a curated vintage shop based in Utrecht, offering authentic clothing, furniture, and collectibles from the 1950s-2000s with international shipping.",
       "link": "https://www.dreamazul.com/en",
       "caption": "dreamazul.com",
       "meta": "Curated vintage shop in Utrecht"
+    },
+    {
+      "header": "A photography portfolio showcasing André Branco's work across portraits, film, and travel photography with a responsive masonry gallery.",
+      "link": "https://andrebranco.com/",
+      "caption": "andrebranco.com",
+      "meta": "Photography portfolio for André Branco"
     },
     {
       "header": "Vale is a private parking management platform for Lisbon restaurants and venues, helping drivers find spots in a city where parking is scarce.",
@@ -28,7 +32,9 @@
       "link": "https://www.mr-monkey.net/",
       "caption": "mr-monkey.net",
       "meta": "Portfolio of Bento, a Developer"
-    },
+    }
+  ],
+  "experiments": [
     {
       "header": "By keeping up with the latest technologies, we're able to offer special and unique content",
       "link": "https://mix-blend-mode.netlify.app/",
