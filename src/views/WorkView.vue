@@ -65,12 +65,11 @@ onUnmounted(() => {
   </div>
   <div class="work-group">
     <MonkeySection
-      v-for="({ header, link, caption, meta, image }, index) in content.experiments"
-      :header="header"
-      :link="link"
-      :caption="caption"
-      :meta="meta"
-      :image="image"
+      v-for="(section, index) in content.experiments"
+      :header="section.header"
+      :link="section.link"
+      :caption="section.caption"
+      :meta="section.meta"
       :key="caption"
       :i="content.clientWork.length + index"
       :total="totalSections"
