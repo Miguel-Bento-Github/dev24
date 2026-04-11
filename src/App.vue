@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import NavBar from "./components/medium/NavBar.vue";
-import { useBuyMeACoffee } from "./hooks/useBuyMeACoffee";
 import { useUserStore } from "./stores/user";
 
 const user = useUserStore();
@@ -10,9 +9,7 @@ if (window?.CookieFirst?.consent.functional) {
   user.setUser();
 }
 
-const year = new Date().getFullYear();
-useBuyMeACoffee();
-</script>
+const year = new Date().getFullYear();</script>
 
 <template>
   <div role="img" aria-hidden="true" class="background"></div>
