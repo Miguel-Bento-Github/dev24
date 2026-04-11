@@ -61,6 +61,18 @@
       "link": "https://miguel-bento-github.github.io/neumorphism/",
       "caption": "neumorphism",
       "meta": "Experimental page with Neumorphism"
+    },
+    {
+      "header": "Duke's Studios was one of our earliest projects — a booking site for a Paris recording studio featuring dynamic carousels and a clean, professional layout.",
+      "link": "https://studios.netlify.app/",
+      "caption": "studios.netlify.app",
+      "meta": "Recording studio booking site"
+    },
+    {
+      "header": "Mr. Monkey is a developer portfolio featuring generative CSS art with css-doodle, creating dynamic animated backgrounds with randomized gradients and geometric patterns.",
+      "link": "https://mr-monkey.netlify.app/",
+      "caption": "mr-monkey.netlify.app",
+      "meta": "Generative CSS art portfolio"
     }
   ]
 }
