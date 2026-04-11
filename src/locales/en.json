@@ -12,26 +12,29 @@
       "header": "Dream Azul is a curated vintage shop based in Utrecht, offering authentic clothing, furniture, and collectibles from the 1950s-2000s with international shipping.",
       "link": "https://www.dreamazul.com/en",
       "caption": "dreamazul.com",
-      "meta": "Curated vintage shop in Utrecht"
+      "meta": "Curated vintage shop in Utrecht",
+      "logo": "https://dreamazul.com/logo.svg"
     },
     {
       "header": "A photography portfolio showcasing André Branco's work across portraits, film, and travel photography with a responsive masonry gallery.",
       "link": "https://andrebranco.com/",
       "caption": "andrebranco.com",
-      "meta": "Photography portfolio for André Branco"
+      "meta": "Photography portfolio for André Branco",
+      "logo": "https://andrebranco.com/favicon.svg"
     },
     {
       "header": "Vale is a private parking management platform for Lisbon restaurants and venues, helping drivers find spots in a city where parking is scarce.",
-      "link": "https://valebooking.com/en/",
-      "caption": "valebooking.com",
+      "link": "https://valepark.org",
+      "caption": "valepark.org",
       "meta": "Parking reservation platform for Lisbon",
-      "image": "https://valepark.org/logo-dark.svg"
+      "logo": "https://valepark.org/logo-dark.svg"
     },
     {
       "header": "Interrail's trip planner helps travellers build custom European rail itineraries, combining route planning with real-time scheduling and booking.",
       "link": "https://www.interrail.eu/en/tripplanner",
       "caption": "interrail.eu",
-      "meta": "Trip planner for European rail travel"
+      "meta": "Trip planner for European rail travel",
+      "logo": "https://www.interrail.eu/content/dam/brand-assets/INTER-LOGO-blue-RGB1.svg"
     }
   ],
   "experiments": [

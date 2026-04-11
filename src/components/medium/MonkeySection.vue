@@ -13,7 +13,7 @@ const props = defineProps<{
   meta: string;
   i: number;
   total: number;
-  image?: string;
+  logo?: string;
 }>();
 
 const isFirst = props.i === 0;
@@ -85,7 +85,6 @@ watch(ratio, (newValue: number) => {
     <p ref="headerRef" class="monkey-header">{{ header }}</p>
     <div ref="wrapperRef" class="monkey-wrapper">
       <button
-        v-if="!image"
         class="expand-btn"
         @click="toggleExpand"
         :aria-label="isExpanded ? 'Collapse' : 'Expand'"
@@ -93,14 +92,7 @@ watch(ratio, (newValue: number) => {
         <IconExpand :expanded="isExpanded" />
       </button>
       <div ref="containerRef" class="monkey-iframe-container">
-        <img
-          v-if="image"
-          :src="image"
-          :alt="meta"
-          class="monkey-image"
-          loading="lazy"
-        />
-        <template v-else>
+        <template>
           <iframe
             :title="meta"
             v-if="src"
@@ -125,6 +117,7 @@ watch(ratio, (newValue: number) => {
       rel="noopener"
       :href="link"
     >
+      <img v-if="logo" :src="logo" :alt="caption" class="monkey-logo" />
       {{ caption }}
     </a>
     <div class="load-trigger"></div>
@@ -247,6 +240,14 @@ watch(ratio, (newValue: number) => {
   width: max-content;
   grid-area: link;
   padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.monkey-logo {
+  height: 1.2em;
+  width: auto;
 }
 
 .monkey-iframe-container {
@@ -269,8 +270,7 @@ watch(ratio, (newValue: number) => {
   }
 }
 
-.monkey iframe,
-.monkey-image {
+.monkey iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -278,7 +278,6 @@ watch(ratio, (newValue: number) => {
   width: 100%;
   border-radius: 24px;
   transition: all 0.15s ease-in-out;
-  object-fit: contain;
 }
 
 .loading {
