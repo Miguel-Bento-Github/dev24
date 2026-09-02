@@ -3,91 +3,102 @@ defineProps<{ isDrawing: boolean }>();
 </script>
 
 <template>
+  <!--
+    Stroke-authored envelope: every path is a single open/closed outline so it
+    can be drawn with a dash offset without doubling back on itself. The motion
+    lines live in the left third of the viewBox and stay hidden until the draw
+    animation runs.
+  -->
   <svg
-    :class="{ active: isDrawing }"
     class="email"
-    width="512pt"
-    height="512pt"
-    version="1.1"
-    viewBox="0 0 512 512"
+    :class="{ active: isDrawing }"
+    viewBox="0 0 30 20"
     xmlns="http://www.w3.org/2000/svg"
-    labelledby="emailTitle"
+    aria-hidden="true"
+    focusable="false"
   >
-    <title id="emailTitle">email icon</title>
     <g class="envelope">
       <path
         pathLength="100"
-        d="m447.65 223.23-222.5-128.4c-1.9219-1.1719-4.3281-1.2188-6.293-0.12109-0.20703 0.12109-28.801 16.648-29.457 17.023-1.9492 1.1562-3.125 3.2695-3.0781 5.5352l-0.46484 164.12c0.058594 3.0156 1.6484 5.7969 4.2227 7.375l223.11 128.81c1 0.58594 2.1367 0.89453 3.2969 0.90625 1.0469 0 2.0742-0.27344 2.9844-0.79688 0.54297-0.3125 28.105-16.367 28.898-16.824 1.9219-1.1484 3.082-3.2422 3.0312-5.4805l0.46875-164.8c-0.0625-3.0078-1.6562-5.7773-4.2227-7.3477zm-35.328 182.02-216.22-124.84 0.44141-156.89 216.21 124.83zm4.8242-166.19-214.13-123.62 18.398-10.996 214.12 123.62zm24.027 153.4-18.609 11.125 0.44141-156.1 18.613-11.121z"
+        d="M11.1 3H27.1A1.6 1.6 0 0 1 28.7 4.6V15.4A1.6 1.6 0 0 1 27.1 17H11.1A1.6 1.6 0 0 1 9.5 15.4V4.6A1.6 1.6 0 0 1 11.1 3Z"
       />
-      <path
-        class="opening"
-        pathLength="100"
-        d="m298.38 293.44c1.0391 1.6445 2.4492 3.0195 4.1172 4.0156 1.2617 0.74609 2.6992 1.1445 4.1641 1.1602 0.91797 0.003907 1.8242-0.17188 2.6758-0.51562l92.473-37.891c2.5977-1.082 3.8359-4.0586 2.7695-6.6641-1.0664-2.6055-4.0352-3.8633-6.6484-2.8125l-90.891 37.242-0.046875-0.066406-93.262-145.12c-0.73047-1.1484-1.8906-1.9609-3.2227-2.25-1.3281-0.29297-2.7188-0.042968-3.8672 0.69531-1.1445 0.73438-1.9492 1.8984-2.2344 3.2305-0.28516 1.332-0.027344 2.7227 0.71484 3.8633z"
-      />
-      <g class="strokeless">
-        <path
-          pathLength="100"
-          d="m447.65 223.23-222.5-128.4c-1.9219-1.1719-4.3281-1.2188-6.293-0.12109-0.20703 0.12109-28.801 16.648-29.457 17.023-1.9492 1.1562-3.125 3.2695-3.0781 5.5352l-0.46484 164.12c0.058594 3.0156 1.6484 5.7969 4.2227 7.375l223.11 128.81c1 0.58594 2.1367 0.89453 3.2969 0.90625 1.0469 0 2.0742-0.27344 2.9844-0.79688 0.54297-0.3125 28.105-16.367 28.898-16.824 1.9219-1.1484 3.082-3.2422 3.0312-5.4805l0.46875-164.8c-0.0625-3.0078-1.6562-5.7773-4.2227-7.3477zm-35.328 182.02-216.22-124.84 0.44141-156.89 216.21 124.83zm4.8242-166.19-214.13-123.62 18.398-10.996 214.12 123.62zm24.027 153.4-18.609 11.125 0.44141-156.1 18.613-11.121z"
-        />
-        <path
-          class="opening"
-          pathLength="100"
-          d="m298.38 293.44c1.0391 1.6445 2.4492 3.0195 4.1172 4.0156 1.2617 0.74609 2.6992 1.1445 4.1641 1.1602 0.91797 0.003907 1.8242-0.17188 2.6758-0.51562l92.473-37.891c2.5977-1.082 3.8359-4.0586 2.7695-6.6641-1.0664-2.6055-4.0352-3.8633-6.6484-2.8125l-90.891 37.242-0.046875-0.066406-93.262-145.12c-0.73047-1.1484-1.8906-1.9609-3.2227-2.25-1.3281-0.29297-2.7188-0.042968-3.8672 0.69531-1.1445 0.73438-1.9492 1.8984-2.2344 3.2305-0.28516 1.332-0.027344 2.7227 0.71484 3.8633z"
-        />
-      </g>
+      <path class="flap" pathLength="100" d="M10.2 3.8 19.1 10.2 28 3.8" />
     </g>
-    <g class="lines" :class="{ active: isDrawing }">
+
+    <g class="strokeless">
       <path
         pathLength="100"
-        d="m164.79 149.18-45.922-26.516h0.003907c-2.4492-1.4141-5.582-0.57422-6.9961 1.875-1.4141 2.4492-0.57422 5.582 1.875 6.9961l45.922 26.516c2.4492 1.4102 5.5781 0.57031 6.9922-1.8789 1.4102-2.4453 0.57422-5.5781-1.875-6.9922z"
+        d="M11.1 3H27.1A1.6 1.6 0 0 1 28.7 4.6V15.4A1.6 1.6 0 0 1 27.1 17H11.1A1.6 1.6 0 0 1 9.5 15.4V4.6A1.6 1.6 0 0 1 11.1 3Z"
       />
-      <path
-        pathLength="100"
-        d="m139.82 192.02c2.3203 0.003907 4.3516-1.5547 4.9531-3.793 0.60156-2.2383-0.37891-4.6055-2.3867-5.7617l-74.582-43.062c-1.1758-0.67969-2.5742-0.86328-3.8867-0.51172s-2.4297 1.2109-3.1094 2.3867c-0.67969 1.1758-0.86328 2.5742-0.51172 3.8867s1.2109 2.4297 2.3906 3.1094l74.578 43.059c0.77734 0.44922 1.6602 0.6875 2.5547 0.6875z"
-      />
-      <path
-        pathLength="100"
-        d="m152.62 232.38-45.922-26.516h0.003906c-2.4492-1.4141-5.582-0.57422-6.9961 1.875-1.4141 2.4492-0.57422 5.582 1.875 6.9961l45.922 26.516c1.1758 0.67969 2.5742 0.86328 3.8867 0.51172s2.4297-1.207 3.1094-2.3867c0.67969-1.1758 0.86328-2.5742 0.51172-3.8867s-1.2109-2.4297-2.3906-3.1094z"
-      />
+      <path class="flap" pathLength="100" d="M10.2 3.8 19.1 10.2 28 3.8" />
+    </g>
+
+    <g class="lines">
+      <path pathLength="100" d="M6.6 6.2H2.6" />
+      <path pathLength="100" d="M6.6 10H1" />
+      <path pathLength="100" d="M6.6 13.8H3.6" />
     </g>
   </svg>
 </template>
 
 <style lang="scss" scoped>
 .email {
+  flex: none;
+  /* sized against the label: viewBox is 30x20, so width is height * 1.5 */
+  height: 1.25em;
+  width: 1.875em;
+  /* the motion lines occupy the left third of the viewBox and are invisible
+     until they draw, so pull the envelope flush with the start of the row */
+  margin-left: -0.6em;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2px;
+  stroke-width: 1.7px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   stroke-dasharray: 100;
   stroke-dashoffset: 0;
-  height: 40px;
-  width: 40px;
-  filter: drop-shadow(0 0 2px #fa8072);
-  margin-left: -8px;
-  margin-right: 8px;
-
-  &:hover .strokeless,
-  &.active .strokeless {
-    animation: draw 0.4s ease-in-out alternate forwards;
-  }
-}
-.lines.active {
-  @for $i from 1 through 3 {
-    path:nth-child(#{$i}) {
-      animation: draw 0.15s ease-in-out forwards;
-      animation-delay: 0.2s + (0.1s * $i);
-    }
-  }
 }
 
-.lines path,
-.strokeless {
-  stroke-width: 4px;
+/* hidden until drawn */
+.strokeless,
+.lines path {
   stroke-dashoffset: 100;
+}
+
+/* the overdraw that thickens the envelope while the link is hovered */
+.strokeless {
+  stroke-width: 2.5px;
+}
+
+.email:hover .strokeless,
+.email.active .strokeless {
+  animation: draw 0.4s ease-in-out alternate forwards;
+}
+
+.email:hover .lines path,
+.email.active .lines path {
+  animation: draw 0.15s ease-in-out forwards;
+}
+
+@for $i from 1 through 3 {
+  .email:hover .lines path:nth-child(#{$i}),
+  .email.active .lines path:nth-child(#{$i}) {
+    animation-delay: 0.2s + (0.1s * $i);
+  }
 }
 
 @keyframes draw {
   to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email:hover .strokeless,
+  .email.active .strokeless,
+  .email:hover .lines path,
+  .email.active .lines path {
+    animation: none;
     stroke-dashoffset: 0;
   }
 }

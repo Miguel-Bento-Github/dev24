@@ -30,7 +30,7 @@ const openBooking = () => {
       type="button"
       class="contact"
     >
-      <IconEmail :isDrawing="isDrawing" :isActive="isActive" />
+      <IconEmail :isDrawing="isDrawing" />
       <span class="email-text">Email me</span>
     </a>
   </div>
