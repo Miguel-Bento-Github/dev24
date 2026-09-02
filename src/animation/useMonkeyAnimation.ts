@@ -49,17 +49,29 @@ export const useMonkeyAnimation = () => {
 
       timelines.push(timeline);
 
+      // Lift the section's children rather than the section itself. The
+      // section is what the nav buttons scroll to and what ScrollTrigger
+      // measures, so translating it makes it overlap the controls below and
+      // sends scrollIntoView to a position it no longer occupies. Moving the
+      // contents looks identical and leaves the section's box where it is.
+      const contents = ref.parentElement
+        ? [...ref.parentElement.children].filter(
+            (child): child is HTMLElement =>
+              child instanceof HTMLElement && !child.classList.contains("load-trigger")
+          )
+        : [];
+
       if (!i) {
         // the lead-in frame only gets the parallax lift, being the first
         // thing below the hero, so it should not fade in as well
-        timeline.from(ref.parentElement, {
+        timeline.from(contents, {
           y: isWide ? "150px" : "50px",
         });
         return;
       }
 
       timeline
-        .from(ref.parentElement, {
+        .from(contents, {
           y: isWide ? "300px" : "50px",
         })
         .from(
