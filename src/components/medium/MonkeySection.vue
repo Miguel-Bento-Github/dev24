@@ -22,12 +22,25 @@ const isFirst = props.i === 0;
 const isLast = props.i === props.total - 1;
 
 const scrollToSection = (direction: "up" | "down") => {
-  const sections = document.querySelectorAll(".monkey");
+  const sections = document.querySelectorAll<HTMLElement>(".monkey");
   const targetIndex = direction === "down" ? props.i + 1 : props.i - 1;
-  const target = sections[targetIndex] as HTMLElement;
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth" });
-  }
+  const target = sections[targetIndex];
+  if (!target) return;
+
+  // The scroll animations translate the section itself, so its live rect is
+  // not where it ends up once the tween settles. scrollIntoView would aim at
+  // the transformed position and overshoot by the full parallax distance.
+  // Aim at the untransformed layout position, less the fixed header.
+  const { m42: translateY } = new DOMMatrix(getComputedStyle(target).transform);
+  const header = document.querySelector("header");
+  const headerHeight = header ? header.getBoundingClientRect().height : 0;
+  const top =
+    target.getBoundingClientRect().top +
+    window.scrollY -
+    translateY -
+    headerHeight;
+
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 };
 
 const { isMatch } = useScreenQuery("(min-width: 550px)");
@@ -338,6 +351,11 @@ watch(ratio, (newValue: number) => {
   justify-content: center;
   gap: 1rem;
   padding: 1rem 0;
+  /* the scroll animations translate .monkey (position: relative) down over
+     this row, and a positioned sibling would otherwise paint on top and
+     swallow the clicks. Stack the controls above the sections. */
+  position: relative;
+  z-index: 1;
 }
 
 .nav-btn {
