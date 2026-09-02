@@ -5,6 +5,7 @@ import { logEvent } from "firebase/analytics";
 import { gsap } from "gsap";
 import { onMounted, ref } from "vue";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
+import { useWordCycle } from "@/animation/useWordCycle";
 
 const CAL_URL = "https://cal.com/dev24";
 
@@ -16,6 +17,9 @@ const openBooking = () => {
 };
 
 const heroRef = ref<HTMLElement | null>(null);
+const wordRef = ref<HTMLElement | null>(null);
+
+const { word } = useWordCycle(content.heroWords, wordRef);
 
 const scrollTo = (id: string) => {
   document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
@@ -80,13 +84,19 @@ onMounted(() => {
   <section ref="heroRef" aria-label="Introduction" class="hero">
     <div class="hero-content">
       <h1 class="hero-headline">
-        <span class="hero-line-1">{{ content.heroLine1 }}</span>
+        <span class="hero-line-1">
+          {{ content.heroLead }}
+          <span ref="wordRef" class="hero-word">{{ word }}</span>
+        </span>
         <span class="hero-line-2">{{ content.heroLine2 }}</span>
       </h1>
       <hr class="hero-rule" />
       <p class="hero-sub">{{ content.heroSub }}</p>
       <div class="hero-actions">
-        <button class="hero-cta hero-cta--work" @click="scrollTo('#client-work')">
+        <button
+          class="hero-cta hero-cta--work"
+          @click="scrollTo('#client-work')"
+        >
           See the work
         </button>
         <button class="hero-cta hero-cta--contact" @click="openBooking">
@@ -126,6 +136,12 @@ onMounted(() => {
   line-height: 1.1;
   color: var(--color-text);
   letter-spacing: -0.02em;
+}
+
+.hero-word {
+  display: inline-block;
+  color: var(--blue);
+  will-change: transform, opacity;
 }
 
 .hero-line-2 {

@@ -1,6 +1,15 @@
 {
   "welcome": "Welcome",
-  "heroLine1": "We build websites",
+  "heroLead": "We build",
+  "heroWords": [
+    "websites",
+    "apps",
+    "software",
+    "extensions",
+    "platforms",
+    "dashboards",
+    "prototypes"
+  ],
   "heroLine2": "worth remembering.",
   "heroSub": "Custom digital experiences with craft, clarity, and code that performs. No templates. No shortcuts.",
   "contact": {
