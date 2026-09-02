@@ -120,7 +120,8 @@ onMounted(() => {
 }
 
 .hero-content {
-  max-width: 720px;
+  /* fits "We build dashboards" on one line at the clamped headline size */
+  max-width: 800px;
 }
 
 .hero-headline {
@@ -140,6 +141,12 @@ onMounted(() => {
 
 .hero-word {
   display: inline-block;
+  /* Reserve the widest word so line 1 keeps the same width whichever word is
+     showing. Without this the headline re-wraps mid-cycle and shunts the rest
+     of the hero down. "dashboards" is the widest at 5.77em; the extra leaves
+     room for the fallback font. Trailing slack is invisible because nothing
+     follows the word on that line. */
+  min-width: 6.2em;
   color: var(--blue);
   will-change: transform, opacity;
 }
