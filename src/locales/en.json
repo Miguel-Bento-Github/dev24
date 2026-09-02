@@ -9,6 +9,22 @@
   },
   "clientWork": [
     {
+      "header": "Commuty is a cost-sharing carpool app for the daily commute, matching drivers and riders on the same weekday route between Utrecht and Amsterdam so riders can chip in for the driver's running costs.",
+      "link": "https://commuty.org/",
+      "caption": "commuty.org",
+      "meta": "Cost-sharing carpool for the Utrecht to Amsterdam commute",
+      "logo": "https://commuty.org/assets/favicon.svg",
+      "screenshot": "/screenshots/commuty.webp"
+    },
+    {
+      "header": "Adopt a Plant is a community platform for rehoming spare cuttings and houseplants, where people offer, swap, or wish for plants near them. Always free, never for sale.",
+      "link": "https://adoptaplant.eu/",
+      "caption": "adoptaplant.eu",
+      "meta": "Plant sharing community for cuttings and houseplants",
+      "logo": "https://adoptaplant.eu/icons/favicon-128x128.png",
+      "screenshot": "/screenshots/adoptaplant.webp"
+    },
+    {
       "header": "Dream Azul is a curated vintage shop based in Utrecht, offering authentic clothing, furniture, and collectibles from the 1950s-2000s with international shipping.",
       "link": "https://www.dreamazul.com/en",
       "caption": "dreamazul.com",
