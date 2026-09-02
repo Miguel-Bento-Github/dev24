@@ -40,51 +40,44 @@ const openBooking = () => {
 .contact-actions {
   margin-top: 4rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
   align-items: center;
 }
 
+/* mirrors .router-link in NavBar.vue */
 .contact {
-  height: max-content;
-  width: max-content;
   display: flex;
   align-items: center;
-  border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  width: max-content;
+  padding: 0.6rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-text);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  transition: all 0.15s ease-in-out;
-  box-shadow: inset 0 -2px 2px 2px var(--color-text-invert),
-    2px 2px 8px var(--color-text-invert);
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
   &:hover {
-    filter: invert(100%);
-    background: var(--color-background);
-    color: var(--color-text);
+    color: var(--blue);
+    border-bottom-color: currentColor;
   }
 
-  &:active {
-    transform: translateY(1px);
-    box-shadow: inset 0 -2px 2px 2px var(--color-text-invert),
-      1px 1px 0 var(--color-text-invert);
-  }
-
+  /* mirrors .book-link in NavBar.vue */
   &--book {
-    background: var(--blue);
+    padding: 0.6rem 1.4rem;
     color: var(--black);
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 0.8rem 1.8rem;
+    background: var(--blue);
     border: none;
-    cursor: pointer;
-    filter: none;
+    border-radius: 2px;
 
     &:hover {
-      filter: none;
+      color: var(--black);
       background: var(--white);
       transform: translateY(-1px);
     }
