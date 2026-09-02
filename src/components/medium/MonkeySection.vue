@@ -3,6 +3,7 @@ import { useElementObserver } from "@/hooks/useElementObserver";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
 import { ref, watch } from "vue";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LoadingSpinner from "../small/LoadingSpinner.vue";
 import IconExpand from "../icons/IconExpand.vue";
 
@@ -51,7 +52,15 @@ const toggleExpand = () => {
     gsap.fromTo(
       wrapperRef.value,
       { opacity: 0 },
-      { opacity: 1, duration: 0.25, ease: "power1.out" }
+      {
+        opacity: 1,
+        duration: 0.25,
+        ease: "power1.out",
+        // expanding changes the page height, so the scroll animations below
+        // need to re-measure. Wait for the fade so the two do not fight over
+        // this wrapper's opacity.
+        onComplete: () => ScrollTrigger.refresh(),
+      }
     );
   } else {
     gsap.to(wrapperRef.value, {
@@ -62,6 +71,7 @@ const toggleExpand = () => {
         gsap.set(headerRef.value, { clearProps: "display" });
         gsap.set(wrapperRef.value, { clearProps: "gridColumn,maxWidth,width,opacity" });
         gsap.set(containerRef.value, { clearProps: "width,height" });
+        ScrollTrigger.refresh();
       },
     });
   }
