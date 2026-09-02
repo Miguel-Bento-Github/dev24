@@ -43,6 +43,10 @@ const scrollToSection = (direction: "up" | "down") => {
   window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 };
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 const { isMatch } = useScreenQuery("(min-width: 550px)");
 
 const src = ref(!isMatch.value || !props.i ? props.link : "");
@@ -174,6 +178,23 @@ watch(ratio, (newValue: number) => {
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+    <button
+      v-if="isLast"
+      class="nav-btn nav-btn--top"
+      @click="scrollToTop"
+      aria-label="Back to top"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M12 20V7" />
+        <path d="M5 14l7-7 7 7" />
+        <path d="M5 4h14" />
       </svg>
     </button>
   </div>
