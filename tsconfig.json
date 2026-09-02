@@ -5,7 +5,7 @@
     "target": "esnext",
     "module": "esnext",
     "useDefineForClassFields": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "strict": true,
     "jsx": "preserve",

@@ -16,7 +16,7 @@ export const useEntrance = () => {
   const conic = (colors: string, x: number, y: number) =>
     `conic-gradient(from 90deg at ${x}% ${y}%,${colors}) no-repeat`;
 
-  const interval: NodeJS.Timer = setInterval(() => {
+  const interval: ReturnType<typeof setInterval> = setInterval(() => {
     const root = document.documentElement;
 
     if (pos.x > 100) {

@@ -41,6 +41,13 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    // Vite 8 defaults to "baseline-widely-available" (chrome111/safari16.4),
+    // which raises the browser floor and rewrites media queries into Level 4
+    // range syntax. Pin the target Vite 2 shipped with so the deployed output
+    // keeps supporting the same browsers it did before the upgrade.
+    target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
+  },
   server: {
     port: 3729,
   },
