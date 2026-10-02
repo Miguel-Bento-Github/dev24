@@ -9,7 +9,7 @@ Dev24 is a Vue 3 portfolio/landing page for a web development company. It showca
 ## Commands
 
 - **Dev server:** `pnpm dev` (serves with `--host`)
-- **Build:** `pnpm build` (runs `vue-tsc --noEmit` then `vite build`)
+- **Build:** `pnpm build` (client build into `dist`, server build into `dist-ssr`, then `scripts/prerender.mjs` writes each route's HTML and `sitemap.xml` into `dist`)
 - **Type check:** `pnpm typecheck`
 - **Lint:** `pnpm lint` (ESLint with auto-fix for `.vue,.js,.jsx,.ts,.tsx` etc.)
 - **Preview:** `pnpm preview` (port 5050)
@@ -29,3 +29,5 @@ Dev24 is a Vue 3 portfolio/landing page for a web development company. It showca
 - **Lazy loading:** Iframes load their `src` only when the section enters the viewport (via `useElementObserver` with IntersectionObserver). On desktop, only the first section loads eagerly.
 - **Firebase:** Config in `src/firebase/`, only initialized when CookieFirst functional consent is granted. Used for Google auth and analytics.
 - **Custom elements:** `css-doodle` is registered as a custom element in `vite.config.ts` compiler options.
+- **Prerendering:** Every route is rendered to static HTML at build time (`src/entry-server.ts` + `scripts/prerender.mjs`) and hydrated in the browser (`src/main.ts`), so the content is readable without JavaScript. Anything that runs during setup or render must work in Node: keep `window`, `document`, `sessionStorage` and observers inside `onMounted`, or behind `import.meta.env.SSR`. The first client render has to match the prerendered markup, so screen-size differences belong in CSS, not in `v-if`.
+- **SEO:** Each route's `meta` in `src/router/routes/index.ts` holds its title and description. `src/seo.ts` turns them into head tags for the prerender and keeps them in step on client-side navigation. Netlify has no catch-all rewrite: unknown URLs get the prerendered `404.html` with a 404 status.
