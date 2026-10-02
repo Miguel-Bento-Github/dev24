@@ -1,15 +1,20 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { createPinia } from "pinia";
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
+import { buildApp } from "./app";
+import { createAppRouter } from "./router";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const app = createApp(App);
+const container = document.querySelector<HTMLElement>("#app")!;
+const router = createAppRouter();
 
-app.use(createPinia());
-app.use(router);
+// Only hydrate markup that was prerendered for this route. Anything else, such
+// as the dev server's empty shell or a cached home page answering for another
+// URL, is rendered from scratch instead.
+const { name } = router.resolve(location.pathname);
+const hydrate = container.dataset.prerendered === String(name);
 
-app.mount("#app");
+const app = buildApp(router, hydrate);
+
+// the route components are lazy, so wait for the first one before mounting
+router.isReady().then(() => app.mount(container));
