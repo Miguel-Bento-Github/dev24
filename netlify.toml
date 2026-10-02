@@ -10,7 +10,13 @@
   to = "https://cal.com/dev24"
   status = 301
 
+# The Netlify subdomain serves the same site, so send it to the real domain
+# rather than have search engines index both.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "https://quizzical-einstein-caf473.netlify.app/*"
+  to = "https://www.dev24.net/:splat"
+  status = 301
+  force = true
+
+# No catch-all rewrite to index.html: every route is prerendered to its own
+# file, and anything else gets dist/404.html with a real 404 status.
