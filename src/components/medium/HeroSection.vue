@@ -27,7 +27,12 @@ const scrollTo = (id: string) => {
 
 const { isMatch: prefersReduced } = useScreenQuery("(prefers-reduced-motion)");
 
+// lifts the stylesheet's hold on the prerendered hero, see .hero-content
+const isLive = ref(false);
+
 onMounted(() => {
+  isLive.value = true;
+
   if (prefersReduced.value || !heroRef.value) return;
 
   const tl = gsap.timeline({ delay: 0.2 });
@@ -81,7 +86,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="heroRef" aria-label="Introduction" class="hero">
+  <section
+    ref="heroRef"
+    aria-label="Introduction"
+    class="hero"
+    :class="{ 'hero--live': isLive }"
+  >
     <div class="hero-content">
       <h1 class="hero-headline">
         <span class="hero-line-1">
@@ -122,6 +132,23 @@ onMounted(() => {
 .hero-content {
   /* fits "We build dashboards" on one line at the clamped headline size */
   max-width: 800px;
+}
+
+/* The hero is prerendered, so it paints before the script that animates it
+   in. Hold it back until then, or it would show, vanish and enter again.
+   Only where a script is going to run and motion is wanted, and it reveals
+   itself after 3s in case the script never arrives. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .hero:not(.hero--live) .hero-content {
+    visibility: hidden;
+    animation: hero-reveal 0s 3s forwards;
+  }
+}
+
+@keyframes hero-reveal {
+  to {
+    visibility: visible;
+  }
 }
 
 .hero-headline {
