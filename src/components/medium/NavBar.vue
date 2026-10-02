@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconMenu from "@/components/icons/IconMenu.vue";
-import router from "@/router";
 import { analytics } from "@/firebase/firebaseConfig";
 import { logEvent } from "firebase/analytics";
-import { computed, onUnmounted, ref, watch, watchEffect } from "vue";
+import { onUnmounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 
 const CAL_URL = "https://cal.com/dev24";
 
@@ -15,25 +15,20 @@ const openBooking = () => {
   window.open(CAL_URL, "_blank", "noopener");
 };
 
-const isSmallScreen = computed(
-  () => window.matchMedia("(max-width: 800px)").matches
-);
+const router = useRouter();
 
-const isMenuOpen = ref(!isSmallScreen.value);
+// Only small screens have a menu to open. Which layout applies is left to the
+// stylesheet, so the prerendered markup is right at every width before any
+// script runs.
+const isMenuOpen = ref(false);
 const navigation = ref<HTMLElement | null>(null);
 const toggle = ref<HTMLElement | null>(null);
 
 const closeMenu = () => {
-  if (isSmallScreen.value) isMenuOpen.value = false;
+  isMenuOpen.value = false;
 };
 
-if (isSmallScreen.value) {
-  watchEffect(() => {
-    router.beforeEach(() => {
-      closeMenu();
-    });
-  });
-}
+const stopClosingOnNavigation = router.beforeEach(closeMenu);
 
 const checkForEscape = ({ code }: KeyboardEvent) => {
   if (code === "Escape") closeMenu();
@@ -57,6 +52,7 @@ watch(isMenuOpen, (newValue) => {
 });
 
 onUnmounted(() => {
+  stopClosingOnNavigation();
   window.removeEventListener("keyup", checkForEscape);
   window.removeEventListener("click", checkForClickOutside);
 });
@@ -72,18 +68,20 @@ onUnmounted(() => {
       ref="toggle"
       class="dots"
       type="button"
-      v-if="isSmallScreen"
+      :aria-expanded="isMenuOpen"
       @click="isMenuOpen = !isMenuOpen"
     >
       <IconMenu :is-open="isMenuOpen" />
     </button>
 
-    <transition name="fade">
-      <nav aria-label="Page links" class="nav" v-if="isMenuOpen">
-        <RouterLink class="router-link" to="/#client-work">Work</RouterLink>
-        <button class="router-link book-link" @click="openBooking">Book</button>
-      </nav>
-    </transition>
+    <nav
+      aria-label="Page links"
+      class="nav"
+      :class="{ 'nav--open': isMenuOpen }"
+    >
+      <RouterLink class="router-link" to="/#client-work">Work</RouterLink>
+      <button class="router-link book-link" @click="openBooking">Book</button>
+    </nav>
   </header>
 </template>
 
@@ -115,7 +113,10 @@ onUnmounted(() => {
 }
 
 .dots {
+  display: none;
+
   @media screen and (max-width: 800px) {
+    display: block;
     position: fixed;
     z-index: 10;
     top: 1rem;
@@ -141,6 +142,20 @@ onUnmounted(() => {
     -webkit-backdrop-filter: blur(10px);
     border-radius: 0.75rem;
     padding: 0.5rem;
+
+    /* closed until the toggle opens it. Same timings as the global .fade
+       transition, and hiding it keeps the links out of the tab order. */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(2rem);
+    transition: all 0.1s ease-in-out;
+
+    &--open {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: all 0.15s ease-out;
+    }
   }
 }
 
