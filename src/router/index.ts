@@ -1,3 +1,4 @@
+import { applySeo, seoFor } from "@/seo";
 import {
   createMemoryHistory,
   createRouter,
@@ -28,11 +29,7 @@ export const createAppRouter = () => {
 
   if (!import.meta.env.SSR) {
     router.afterEach((to) => {
-      queueMicrotask(() => {
-        if (typeof to.meta.title === "string") {
-          document.title = to.meta.title;
-        }
-      });
+      queueMicrotask(() => applySeo(seoFor(to)));
     });
   }
 
