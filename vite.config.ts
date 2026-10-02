@@ -47,6 +47,15 @@ export default defineConfig({
     // range syntax. Pin the target Vite 2 shipped with so the deployed output
     // keeps supporting the same browsers it did before the upgrade.
     target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
+    // The pages are prerendered, so their styles have to be in the stylesheet
+    // the HTML links to. Split per route, a page's own styles would only
+    // arrive with its script and the markup would paint unstyled first.
+    cssCodeSplit: false,
+  },
+  ssr: {
+    // gsap ships ES modules without declaring them, which Node refuses to
+    // load from node_modules. Bundle it into the prerender build instead.
+    noExternal: ["gsap"],
   },
   server: {
     port: 3729,
