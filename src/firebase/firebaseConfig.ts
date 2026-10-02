@@ -14,7 +14,7 @@ export const firebaseConfig = {
 };
 
 let analytics: Analytics, firebaseAuth: Auth;
-if (window?.CookieFirst?.consent.functional) {
+if (!import.meta.env.SSR && window.CookieFirst?.consent.functional) {
   const firebaseApp = initializeApp(firebaseConfig);
   analytics = getAnalytics(firebaseApp);
   firebaseAuth = getAuth();

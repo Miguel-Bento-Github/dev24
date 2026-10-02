@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import router from "@/router";
 import { onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 
-if (!sessionStorage.isPrivacyOpen && !sessionStorage.wasPrivacyOpen) {
-  router.go(0);
-}
+const router = useRouter();
 
 onMounted(() => {
+  if (!sessionStorage.isPrivacyOpen && !sessionStorage.wasPrivacyOpen) {
+    router.go(0);
+  }
+
   sessionStorage.setItem("isPrivacyOpen", "true");
   sessionStorage.setItem("wasPrivacyOpen", "true");
+
+  window.onunload = () => sessionStorage.removeItem("wasPrivacyOpen");
 });
 
 onUnmounted(() => {
   sessionStorage.removeItem("isPrivacyOpen");
 });
-
-window.onunload = () => sessionStorage.removeItem("wasPrivacyOpen");
 </script>
 
 <template>

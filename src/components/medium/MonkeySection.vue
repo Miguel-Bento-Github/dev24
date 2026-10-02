@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useElementObserver } from "@/hooks/useElementObserver";
 import { useScreenQuery } from "@/hooks/useScreenQuery";
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LoadingSpinner from "../small/LoadingSpinner.vue";
@@ -49,7 +49,13 @@ const scrollToTop = () => {
 
 const { isMatch } = useScreenQuery("(min-width: 550px)");
 
-const src = ref(!isMatch.value || !props.i ? props.link : "");
+// The prerendered markup has no iframes, so start without one and decide once
+// mounted. Narrow screens and the first section load theirs straight away.
+const src = ref("");
+
+onMounted(() => {
+  if (!isMatch.value || !props.i) src.value = props.link;
+});
 
 const { elementRef, ratio } = useElementObserver(0.1);
 const isLoading = ref(true);
