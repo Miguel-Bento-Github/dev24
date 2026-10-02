@@ -11,11 +11,33 @@
       name="viewport"
       content="width=device-width, height=device-height, initial-scale=1.0"
     />
+    <!-- scripts/prerender.mjs swaps this block for each page's own tags -->
+    <!--seo-->
     <title>Dev24</title>
+    <!--/seo-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dev24" />
     <meta
-      name="description"
-      content="Get a website, create a website. Developer near me."
+      property="og:image"
+      content="https://www.dev24.net/android-chrome-512x512.png"
     />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Dev24",
+        "url": "https://www.dev24.net/",
+        "logo": "https://www.dev24.net/android-chrome-512x512.png",
+        "email": "hello@dev24.net",
+        "description": "Dev24 builds custom websites, web apps and software.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Utrecht",
+          "addressCountry": "NL"
+        }
+      }
+    </script>
     <link
       rel="alternate icon"
       href="/favicon.ico"
@@ -28,7 +50,7 @@
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
   </head>
   <body>
-    <div aria-label="main application" id="app"></div>
+    <div aria-label="main application" id="app"><!--app--></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
