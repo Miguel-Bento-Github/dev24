@@ -16,10 +16,18 @@ export default defineConfigWithVueTs(
   },
   {
     name: "app/files-to-ignore",
-    ignores: ["dist/**", "coverage/**", "node_modules/**"],
+    ignores: ["dist/**", "dist-ssr/**", "coverage/**", "node_modules/**"],
   },
   js.configs.recommended,
   pluginVue.configs["flat/essential"],
   vueTsConfigs.recommended,
+  {
+    // plain Node scripts, which no-undef would otherwise not know the globals of
+    name: "app/node-scripts",
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      globals: { URL: "readonly", console: "readonly" },
+    },
+  },
   skipFormatting
 );
